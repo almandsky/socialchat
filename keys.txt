@@ -1,1 +1,9 @@
-test modify
+export FACEBOOK_APP_ID=371656099548187
+export FACEBOOK_SECRET=625e6e12db08440489bc5a671ecfc3ec
+
+
+
+export GOOGLE_CLIENT_ID=890249333148-29iflb0roje9o2qc920151dsse6davt9.apps.googleusercontent.com
+export GOOGLE_CLIENT_SECRET=00VdJ2j-1KCM1UekwDBTER3c
+export CALLBACK_URL=http://ec2-72-44-39-177.compute-1.amazonaws.com:8080/auth/google/callback
+export REDIRECT_URL=http://ec2-72-44-39-177.compute-1.amazonaws.com:8080/

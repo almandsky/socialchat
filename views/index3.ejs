@@ -11,8 +11,27 @@
 
      <link rel="stylesheet" href="https://s-static.ak.fbcdn.net/rsrc.php/v2/ya/r/zlVq5y5_w28.css" media="Screen" type="text/css" />
 
+	<%
 
+	var picture = false;
+	var userid = false;
+	var username = false;
+	var acctype = false;
+	if (user) {
+		if (user.facebook){
+			picture = 'http://graph.facebook.com/' + user.facebook.id + '/picture?type=square';
+			username = user.facebook.name;
+			userid = user.facebook.id;
+			acctype = 'facebook';
+		} else if (user.google){
+			picture = user.google.picture;
+			username = user.google.name;
+			userid = user.google.id;
+			acctype = 'google';
+		}
+	}
 
+	%>
     <style>
     #input { border-radius:2px; border:1px solid #ccc;
              margin-top:10px; padding:5px; width:250px;  }
@@ -28,13 +47,13 @@
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="Social Chat (Google)" />
+    <meta property="og:title" content="Social Chat" />
     <meta property="og:type" content="website" />
 	<meta property="og:url" content="<%= scheme %><%= url_no_scheme('') %>" />
 	<meta property="og:image" content="<%= scheme %><%= url_no_scheme('/images/logo.png') %>" />
-    <meta property="og:site_name" content="<%= app.name %>" />
+    <meta property="og:site_name" content="Social Chat" />
     <meta property="og:description" content="Real time social chat room" />
-    <meta property="fb:app_id" content="<%= app.id %>" />
+    <meta property="fb:app_id" content="295798450512324" />
 
     <!--script type="text/javascript" src="/scripts/jquery.min.js"></script-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -145,15 +164,16 @@
 
     <header class="clearfix">
       <% if (user) { %>
-      <p id="picture" style="background-image: url(<%= user._json.picture %>)"></p>
+      <p id="picture" style="background-image: url(<%= picture %>)"></p>
            
       <div>
 	    <h1>Social Chat (Google)</h1>
-        <h2>Welcome, <strong><%= user.displayName %></strong></h2>
-		<div><input id="userid" type="hidden" value="<%= user._json.picture %>">
-		<input id="username" type="hidden" value="<%= user.displayName %>">
-		<input id="acctype" type="hidden" value="google"></div>
-		<div align="right"> <a href="http://ec2-72-44-39-177.compute-1.amazonaws.com/">Switch to Facebook User</a></div>
+        <h2>Welcome, <strong><%= username %></strong></h2>
+		<div><input id="userid" type="hidden" value="<%= userid %>">
+		<input id="username" type="hidden" value="<%= username %>">
+		<input id="userpicture" type="hidden" value="<%= picture %>">
+		<input id="acctype" type="hidden" value="<%= acctype %>"></div>
+		<div align="right"> <a href="/logout">Log out</a></div>
 
         <!--
         <p class="tagline">
@@ -189,8 +209,9 @@
       <% } else { %>
       <div>
 	    <h1>Social Chat</h1>
-        <h2>Welcome, please login with you Facebook or Google account</h2>
-        <a href="http://ec2-72-44-39-177.compute-1.amazonaws.com/"><img height="22px" src="/images/fb-login.png"/></a> <br/>
+        <h2>Welcome, please login and join the chat:</h2>
+        <!--a href="http://ec2-72-44-39-177.compute-1.amazonaws.com/"><img height="22px" src="/images/fb-login.png"/></a> <br/-->
+        <a href="/auth/facebook"><img height="22px" src="/images/fb-login.png"/></a> <br/>
         <a href="/auth/google"><img height="22px" src="/images/google-login.png"/></a>
         <!--div class="fb-login-button" data-scope="user_likes,user_photos"> </div-->
 	 <!--img width="71px" src="https://richi.com/images/ya_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/go_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/pl_login.jpg"-->
