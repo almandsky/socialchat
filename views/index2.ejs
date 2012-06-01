@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+
+    <title>Social Chat (Facebook)</title>
+    <link rel="canonical" href="http://fbwebsocket.nodester.com" />
+    <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
+
+     <link rel="stylesheet" href="https://s-static.ak.fbcdn.net/rsrc.php/v2/ya/r/zlVq5y5_w28.css" media="Screen" type="text/css" />
+
+
+
+    <style>
+    #input { border-radius:2px; border:1px solid #ccc;
+             margin-top:10px; padding:5px; width:250px;  }
+    #status { width:88px; display:block; float:left; margin-top:15px; }
+    </style>
+
+    <!--[if IEMobile]>
+    <link rel="stylesheet" href="mobile.css" media="screen" type="text/css"  />
+    <![endif]-->
+
+    <!-- These are Open Graph tags.  They add meta data to your  -->
+    <!-- site that facebook uses when your content is shared     -->
+    <!-- over facebook.  You should fill these tags in with      -->
+    <!-- your data.  To learn more about Open Graph, visit       -->
+    <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
+    <meta property="og:title" content="Social Chat (Facebook)" />
+    <meta property="og:type" content="website" />
+	<meta property="og:url" content="<%= scheme %><%= url_no_scheme('') %>" />
+	<meta property="og:image" content="<%= scheme %><%= url_no_scheme('/images/logo.png') %>" />
+    <meta property="og:site_name" content="<%= app.name %>" />
+    <meta property="og:description" content="Real time social chat room" />
+    <meta property="fb:app_id" content="<%= app.id %>" />
+
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      function logResponse(response) {
+        if (console && console.log) {
+          console.log('The response was', response);
+        }
+      }
+
+      $(function(){
+        // Set up so we handle click on the buttons
+        $('#postToWall').click(function() {
+          FB.ui(
+            {
+              method : 'feed',
+              link   : $(this).attr('data-url')
+            },
+            function (response) {
+              // If response is null the user canceled the dialog
+              if (response != null) {
+                logResponse(response);
+              }
+            }
+          );
+        });
+
+        $('#sendToFriends').click(function() {
+          FB.ui(
+            {
+              method : 'send',
+              link   : $(this).attr('data-url')
+            },
+            function (response) {
+              // If response is null the user canceled the dialog
+              if (response != null) {
+                logResponse(response);
+              }
+            }
+          );
+        });
+
+        $('#sendRequest').click(function() {
+          FB.ui(
+            {
+              method  : 'apprequests',
+              message : $(this).attr('data-message')
+            },
+            function (response) {
+              // If response is null the user canceled the dialog
+              if (response != null) {
+                logResponse(response);
+              }
+            }
+          );
+        });
+      });
+    </script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.v0.9.6.js"></script>
+    <script src="/chat-frontend2.js"></script>
+
+    <!--[if IE]>
+      <script type="text/javascript">
+        var tags = ['header', 'section'];
+        while(tags.length)
+          document.createElement(tags.pop());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '<%= app.id %>', // App ID
+          channelUrl : '<%= scheme %><%= url_no_scheme('/channel.html') %>', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true // parse XFBML
+        });
+
+        // Listen to the auth.login which will be called when the user logs in
+        // using the Login button
+        FB.Event.subscribe('auth.login', function(response) {
+          // We want to reload the page now so PHP can read the cookie that the
+          // Javascript SDK sat. But we don't want to use
+          // window.location.reload() because if this is in a canvas there was a
+          // post made to this page and a reload will trigger a message to the
+          // user asking if they want to send data again.
+          window.location = window.location;
+        });
+
+        FB.Canvas.setAutoGrow();
+      };
+
+      // Load the SDK Asynchronously
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <header class="clearfix">
+      <% if (user) { %>
+      <p id="picture" style="background-image: url(http://graph.facebook.com/<%= user.id %>/picture?type=square)"></p>
+           
+      <div>
+	    <h1>Social Chat (Facebook)</h1>
+        <h2>Welcome, <strong><%= user.name %></strong></h2>
+		<div><input id="userid" type="hidden" value="<%= user.id %>">
+		<input id="username" type="hidden" value="<%= user.name %>">
+		<input id="acctype" type="hidden" value="facebook"></div>
+		<div align="right"> <a style="color:red" href="http://skyeveryauth.nodester.com/auth/google">Switch to Google User</a></div>
+
+        <!--
+        <p class="tagline">
+          This is your app
+          <a href="<%= app.link %>" target="_top"><%= app.name %></a>
+        </p>
+
+        <div id="share-app">
+          <p>Share your app:</p>
+          <ul>
+            <li>
+              <a href="#" class="facebook-button" id="postToWall" data-url="<%= scheme %><%= url_no_scheme('') %>">
+                <span class="plus">Post to Wall</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<%= scheme %><%= url_no_scheme('') %>">
+                <span class="speech-bubble">Send Message</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
+                <span class="apprequests">Send Requests</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        -->
+      </div>
+	  <div class="fb-like" data-href="http://fbwebsocket.nodester.com/" data-send="false" data-width="300" data-show-faces="false"></div>
+  	  <g:plusone></g:plusone>
+
+      <% } else { %>
+      <div>
+	    <h1>Social Chat</h1>
+        <h2>Welcome, please login with you Facebook or Google account</h2>
+        <div class="fb-login-button" data-scope="user_likes,user_photos"> </div>
+        <a href="http://skyeveryauth.nodester.com/auth/google"><img height="22px" src="/images/google-login.png"/></a>
+	 <!--img width="71px" src="https://richi.com/images/ya_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/go_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/pl_login.jpg"-->
+	   <br/>
+	
+      </div>
+      <div class="fb-like" data-href="http://fbwebsocket.nodester.com/" data-send="false" data-width="300" data-show-faces="false"></div>
+	  <g:plusone></g:plusone>
+
+      <% } %>
+
+      <script type="text/javascript">
+	      window.___gcfg = {
+	        lang: 'en-US'
+	      };
+
+	      (function() {
+	        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	        po.src = 'https://apis.google.com/js/plusone.js';
+	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	      })();
+	  </script>
+    </header>
+
+    <!--
+    <section id="get-started">
+      <p>This is my app, I can edit it all I want.</p>
+      <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Learn How to Edit This App</a>
+    </section>
+    -->
+
+	<section id="guides" class="clearfix">
+	    <!--span id="status">Connecting...</span-->
+        <div id="content"></div>
+    </section>
+
+    <% if (user) { %>
+
+    <section id="samples" class="clearfix">
+      <div>
+	      Say something: <br/>
+          <input type="text" id="input" disabled="disabled" />
+      </div>
+      
+      
+    </section>
+
+    <% } else { %>
+     	<section id="samples" class="clearfix">
+		      <h2 style="color:red">Please click the login button above first to join the chat room</h2>
+	    </section>
+      <% } %>
+
+
+
+    <!-- Disqus comment widget -->
+   
+    <br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	
+	<hr/>
+
+    <div id="disqus_thread" style="background-color:#EEE; margin:5px"></div>
+	<script type="text/javascript">
+	    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	    var disqus_shortname = 'socialchat'; // required: replace example with your forum shortname
+	    var disqus_url = 'http://fbwebsocket.nodester.com/';
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+	<script type="text/javascript">
+	    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	    var disqus_shortname = 'socialchat'; // required: replace example with your forum shortname
+	    var disqus_url = 'http://fbwebsocket.nodester.com/';
+
+	    /* * * DON'T EDIT BELOW THIS LINE * * */
+	    (function () {
+	        var s = document.createElement('script'); s.async = true;
+	        s.type = 'text/javascript';
+	        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+	        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	    }());
+	</script>
+	
+	
+	
+    <script type="text/javascript">
+	setTimeout(function(){var a=document.createElement("script");
+	var b=document.getElementsByTagName("script")[0];
+	a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0012/8608.js?"+Math.floor(new Date().getTime()/3600000);
+	a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+	</script>
+	
+
+  </body>
+</html>
+
