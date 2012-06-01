@@ -9,7 +9,7 @@ var conf = require('./conf');
 //For socket.io
 var async   = require('async');
 
-
+var port = process.env['app_port'] || process.env.PORT || 3000;
 
 //start of everyauth
 
@@ -461,7 +461,7 @@ var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 var CALLBACK_URL =  process.env.CALLBACK_URL;
 var REDIRECT_URL = process.env.REDIRECT_URL;
 */
-var port = process.env['app_port'] || process.env.PORT || 3000;
+
 
 //For Facebook
 /*
