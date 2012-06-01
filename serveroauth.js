@@ -422,131 +422,10 @@ everyauth
     })
     .redirectPath("/");
 */
-/*
-var app = express.createServer(
-    express.bodyParser()
-  , express.static(__dirname + "/public")
-  , express.favicon()
-  , express.cookieParser()
-  , express.session({ secret: 'htuayreve'})
-  , everyauth.middleware()
-);
 
-app.configure( function () {
-  app.set('view engine', 'jade');
-  app.set('views', everyauthRoot + '/views/');
-});
-
-app.get('/', function (req, res) {
-  res.render('home');
-});
-
-app.listen(3000);
-
-console.log('Go to http://local.host:3000');
-
-//module.exports = app;
-*/
 
 //End of everyauth
-/*
-var fbpassport = require('passport');
 
-var FacebookStrategy = require('passport-facebook').Strategy;
-
-// API Access link for creating client ID and secret:
-// https://code.google.com/apis/console/
-var GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-var CALLBACK_URL =  process.env.CALLBACK_URL;
-var REDIRECT_URL = process.env.REDIRECT_URL;
-*/
-
-
-//For Facebook
-/*
-var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
-var FACEBOOK_APP_SECRET = process.env.FACEBOOK_SECRET;
-var FACEBOOK_CALLBACK_URL =  process.env.FACEBOOK_CALLBACK_URL;
-
-
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session.  Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.  However, since this example does not
-//   have a database of user records, the complete Google profile is
-//   serialized and deserialized.
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-
-// Use the GoogleStrategy within Passport.
-//   Strategies in Passport require a `verify` function, which accept
-//   credentials (in this case, an accessToken, refreshToken, and Google
-//   profile), and invoke a callback with a user object.
-passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: CALLBACK_URL
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-      
-      // To keep the example simple, the user's Google profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Google account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
-    });
-  }
-));
-
-
-// Passport session setup.
-// To support persistent login sessions, Passport needs to be able to
-// serialize users into and deserialize users out of the session. Typically,
-// this will be as simple as storing the user ID when serializing, and finding
-// the user by ID when deserializing. However, since this example does not
-// have a database of user records, the complete Facebook profile is serialized
-// and deserialized.
-fbpassport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-fbpassport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-
-// Use the FacebookStrategy within Passport.
-// Strategies in Passport require a `verify` function, which accept
-// credentials (in this case, an accessToken, refreshToken, and Facebook
-// profile), and invoke a callback with a user object.
-fbpassport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    process.nextTick(function () {
-      
-      // To keep the example simple, the user's Facebook profile is returned to
-      // represent the logged-in user. In a typical application, you would want
-      // to associate the Facebook account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
-    });
-  }
-));
-*/
 var app = express.createServer(
 	  express.bodyParser()
 	, express.static(__dirname + "/public")
@@ -559,24 +438,6 @@ var app = express.createServer(
 
 
 // configure Express
-/*
-app.configure(function() {
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.logger());
-  app.use(express.static(__dirname + '/public'));
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.session({ secret: 'keyboard cat' }));
-  // Initialize Passport!  Also use passport.session() middleware, to support
-  // persistent login sessions (recommended).
-  app.use(fbpassport.initialize());
-  app.use(fbpassport.session());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
-*/
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
@@ -608,12 +469,6 @@ app.dynamicHelpers({
 });
 
 
-/*
-app.get('/', function (req, res) {
-  res.render('index3');
-});
-*/
-
 
 app.get('/', function(req, res){
 //  console.log("app object is: =====================================================");
@@ -631,71 +486,7 @@ app.get('/', function(req, res){
   });
 });
 
-/*
 
-app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
-});
-
-app.get('/login', function(req, res){
-  res.render('login', { user: req.user });
-});
-
-// GET /auth/google
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  The first step in Google authentication will involve
-//   redirecting the user to google.com.  After authorization, Google
-//   will redirect the user back to this application at /auth/google/callback
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile',
-                                            'https://www.googleapis.com/auth/userinfo.email'] }),
-  function(req, res){
-    // The request will be redirected to Google for authentication, so this
-    // function will not be called.
-  });
-
-// GET /auth/google/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function function will be called,
-//   which, in this example, will redirect the user to the home page.
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect(REDIRECT_URL);
-    //res.writeHead(200);
-	//res.end('{ userid: ' + req.user.id + ', username: '+ req.user.displayName + ' }');
-  });
-
-
-
-
-// GET /auth/facebook
-// Use passport.authenticate() as route middleware to authenticate the
-// request. The first step in Facebook authentication will involve
-// redirecting the user to facebook.com. After authorization, Facebook will
-// redirect the user back to this application at /auth/facebook/callback
-app.get('/auth/facebook',
-  fbpassport.authenticate('facebook'),
-  function(req, res){
-    // The request will be redirected to Facebook for authentication, so this
-    // function will not be called.
-  });
-
-// GET /auth/facebook/callback
-// Use passport.authenticate() as route middleware to authenticate the
-// request. If authentication fails, the user will be redirected back to the
-// login page. Otherwise, the primary route function function will be called,
-// which, in this example, will redirect the user to the home page.
-app.get('/auth/facebook/callback',
-  fbpassport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-
-
-
-*/
 
 
 app.get('/logout', function(req, res){
@@ -755,14 +546,14 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
  */
 console.log((new Date()) + ' Preparing for DB Conection');
 var databaseUrl = "mongodb://nodejitsu:a5ca3279a71b623cafcb04bfe509f0cf@staff.mongohq.com:10025/nodejitsudb34997110727"; 
-var collections = ["chathistorydev"]
+var collections = ["chathistory2"]
 var db = require("mongojs").connect(databaseUrl, collections);
 
 console.log((new Date()) + ' DB Conected.  Fetching data');
 
-db.chathistorydev.find(function(err, chathistorydev) {
-  if( err || !chathistorydev) console.log((new Date()) + "No chat history found");
-  else chathistorydev.forEach( function(loadhistory) {
+db.chathistory2.find(function(err, chathistory2) {
+  if( err || !chathistory2) console.log((new Date()) + "No chat history found");
+  else chathistory2.forEach( function(loadhistory) {
     //console.log(loadhistory);
     if (loadhistory.text.indexOf('|') < 0){
         history.push(loadhistory);
