@@ -117,7 +117,7 @@ $(function () {
                   // insert every single message to the chat window
                   for (var i=0; i < json.data.length; i++) {
                       addMessage(json.data[i].acctype, json.data[i].author, json.data[i].text,
-                             json.data[i].color, new Date(json.data[i].time), json.data[i].picture);
+                             json.data[i].userid, new Date(json.data[i].time), json.data[i].picture);
                   }
                   historyshown = true;
               //}
