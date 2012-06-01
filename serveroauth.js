@@ -663,14 +663,14 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
                 history.push(obj);
 	            history = history.slice(-100);
 	
-	/*
-		      	db.chathistorydev.save(obj, function(err, saved) {
+	
+		      	db.chathistory2.save(obj, function(err, saved) {
 					  if( err || !saved ) console.log((new Date()) + "Chat History not saved");
 					  else {
 						 console.log((new Date()) + "Chat History saved");
 					  }
 			      });
-			*/
+			
 			
 	          } else {
 				
