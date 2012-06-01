@@ -449,7 +449,7 @@ console.log('Go to http://local.host:3000');
 */
 
 //End of everyauth
-
+/*
 var fbpassport = require('passport');
 
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -460,10 +460,11 @@ var GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 var CALLBACK_URL =  process.env.CALLBACK_URL;
 var REDIRECT_URL = process.env.REDIRECT_URL;
-
+*/
 var port = process.env['app_port'] || process.env.PORT || 3000;
 
 //For Facebook
+/*
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
 var FACEBOOK_APP_SECRET = process.env.FACEBOOK_SECRET;
 var FACEBOOK_CALLBACK_URL =  process.env.FACEBOOK_CALLBACK_URL;
@@ -545,7 +546,7 @@ fbpassport.use(new FacebookStrategy({
     });
   }
 ));
-
+*/
 var app = express.createServer(
 	  express.bodyParser()
 	, express.static(__dirname + "/public")
