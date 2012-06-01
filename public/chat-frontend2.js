@@ -106,7 +106,7 @@ $(function () {
           // NOTE: if you're not sure about the JSON structure
           // check the server source code above
           if (json.type === 'user') { // first response from the server with user's color
-              console.log(json);
+              //console.log(json);
               myID = json.data;
               //status.text(myName + ': ').css('color', myColor);
               input.removeAttr('disabled').focus();
@@ -162,14 +162,9 @@ $(function () {
 	    /**
 	     * Add message to the chat window
 	     */
+	    /*
 	    function addMessage(acc_type, author, message, acc_id, dt) {
-		    /*
-	        content.append('<p><span style="color:' + color + '">' + author + '</span> @ ' +
-	             + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
-	             + (dt.getMinutes() < 10 ? '0' + dt.getMinutes() : dt.getMinutes())
-	             + ': ' + message + '</p>');
-	        */
-	
+			
 	        if (acc_id === undefined || acc_id === 'undefined'){
 		        acc_id = '';
 			}
@@ -194,6 +189,7 @@ $(function () {
 				     + '</abbr></span></span></form></div></div></div></p>');
 			}
 	    }
+	    */
 	
 		/**
 	     * Add message to the chat window
@@ -206,9 +202,11 @@ $(function () {
 	             + ': ' + message + '</p>');
 	        */
 	
+	        /*
 	        if (acc_id === undefined || acc_id === 'undefined'){
 		        acc_id = '';
 			}
+			*/
 	
             if (acc_type ==='facebook') {
 	          content.append('<p><div class="UIImageBlock clearfix"><a data-hovercard="/ajax/hovercard/hovercard.php?id=' + acc_id + '" data-ft="{&quot;type&quot;:60,&quot;tn&quot;:&quot;\u003C&quot;}" aria-hidden="true" tabindex="-1" href="http://www.facebook.com/' + acc_id + '" class="actorPhoto UIImageBlock_Image UIImageBlock_MED_Image"><img style="width:32px;height:32px" alt="" src="http://graph.facebook.com/' + acc_id + '/picture?type=square" class="uiProfilePhoto profilePic uiProfilePhotoLarge img"></a><div class="storyInnerContent UIImageBlock_Content UIImageBlock_MED_Content"><div class="mainWrapper"><h6 data-ft="{&quot;tn&quot;:&quot;:&quot;}" class="uiStreamMessage uiStreamHeadline"><div data-ft="{&quot;type&quot;:2,&quot;tn&quot;:&quot;:&quot;}" class="actorDescription actorName"><a data-ft="{&quot;tn&quot;:&quot;;&quot;}" href="http://www.facebook.com/' + acc_id + '">' + author + ' (Facebook)</a></div></h6><h6 data-ft="{&quot;type&quot;:1,&quot;tn&quot;:&quot;K&quot;}" class="uiStreamMessage"> <span data-ft="{&quot;type&quot;:3}" class="messageBody">' + message + '</span></h6><form id="usccqv_1" onsubmit="return Event.__inlineSubmit(this,event)" action="/ajax/ufi/modify.php" method="post" class="commentable_item collapsed_comments autoexpand_mode" rel="async"><input type="hidden" value="€,´,€,´,水,Д,Є" name="charset_test"><input type="hidden" autocomplete="off" value="AQADxKYw" name="fb_dtsg"><span class="uiStreamFooter"><span data-ft="{&quot;tn&quot;:&quot;=&quot;,&quot;type&quot;:20}" class="UIActionLinks UIActionLinks_bottom"></span><span data-ft="{&quot;type&quot;:26,&quot;tn&quot;:&quot;N&quot;}" class="uiStreamSource"><abbr class="timestamp livetimestamp" data-utime="" title="">'
