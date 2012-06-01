@@ -22,7 +22,8 @@ $(function () {
 	var historyshown = false;
 	
 	
-	  var socket = io.connect();
+//	  var socket = io.connect();
+	  var socket = io.connect('http://ec2-72-44-39-177.compute-1.amazonaws.com/');
 	  socket.on('connect', function () {
 	    //socket.send('hi');
 	    /*
