@@ -9,7 +9,7 @@ var conf = require('./conf');
 //For socket.io
 var async   = require('async');
 
-var port = process.env['app_port'] || process.env.PORT || 3000;
+var port = process.env['app_port'] || process.env.PORT || 80;
 
 //start of everyauth
 
