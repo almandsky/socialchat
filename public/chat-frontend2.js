@@ -143,7 +143,7 @@ $(function () {
 		/**
 	     * Add message to the chat window
 	     */
-	    function addMessage(author, message, acc_id, dt) {
+	    function addMessageold(author, message, acc_id, dt) {
 		    /*
 	        content.append('<p><span style="color:' + color + '">' + author + '</span> @ ' +
 	             + (dt.getHours() < 10 ? '0' + dt.getHours() : dt.getHours()) + ':'
