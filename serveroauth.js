@@ -613,7 +613,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
   });
 */
   socket.on('message', function (message) { 
-	  console.log((new Date()) + ' message received');
+	  //console.log((new Date()) + ' message received');
 	  //console.dir(message);
 	  //console.dir(JSON.parse(message));
   	//  console.dir(message.data);
@@ -623,7 +623,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
           if (userName === false || userName === undefined) { // first message sent by user is their name
               // remember user name
               var tempobj = JSON.parse(message);
-              console.dir(tempobj);
+              //console.dir(tempobj);
 
               if (tempobj){
 
@@ -634,7 +634,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 				userPhoto = tempobj.picture;
               
 			  }
-              console.log("user name is: " + userName);
+              //console.log("user name is: " + userName);
 
               // get random color and send it back to the user
               //userColor = colors.shift();
