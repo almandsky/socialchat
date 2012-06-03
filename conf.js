@@ -4,8 +4,8 @@ module.exports = {
       , appSecret: 'e5133aa67f708df5fc4b6149a50c33cf'
     }
   , twit: {
-        consumerKey: 'JLCGyLzuOK1BjnKPKGyQ'
-      , consumerSecret: 'GNqKfPqtzOcsCtFbGTMqinoATHvBcy1nzCTimeA9M0'
+        consumerKey: 'jrxU67e3zmMA6yPsMhtOWw'
+      , consumerSecret: 'mNE1xVk2rxjYjHe07ArFDRD85yPLfgFRGs72eLcnETc'
     }
   , github: {
         appId: '11932f2b6d05d2a5fa18'
@@ -24,8 +24,8 @@ module.exports = {
         apiSecret: 'e1e23f135776452898a6d268129bf153'
     }
   , linkedin: {
-        apiKey: 'pv6AWspODUeHIPNZfA531OYcFyB1v23u3y-KIADJdpyw54BXh-ciiQnduWf6FNRH'
-      , apiSecret: 'Pdx7DCoJRdAk0ai3joXsslZvK1DPCQwsLn-T17Opkae22ZYDP5R7gmAoFes9TNHy'
+        apiKey: '2sonqfynrd51'
+      , apiSecret: 'QanorxUNFXNhhW0G'
     }
   , google: {
         clientId: '890249333148-cp44gdp3ubdbctfhpuu97pk3uiuc29rh.apps.googleusercontent.com'
@@ -44,8 +44,8 @@ module.exports = {
       , clientSecret: 'e0ec367efb9d59fa10bdd53ba268b81f'
     }
   , yahoo: {
-        consumerKey: 'dj0yJmk9RVExRlhPRE9rV1hSJmQ9WVdrOWEyRTBVMUJoTm1zbWNHbzlNVE13TURFeU9UTTJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD1iYg--'
-      , consumerSecret: 'efe6ae4982217630fe3aebf6e6fa1e82c02eba0b'
+        consumerKey: 'dj0yJmk9OUVtbkZoeDBhWkVRJmQ9WVdrOVRHMW5VR1JQTjJNbWNHbzlNVEl6TURRNE5USTJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD0xMA--'
+      , consumerSecret: '2c21a0ce70fac8ea90290e51874c517b9500741b'
     }
 , readability: {
         consumerKey: 'Alfrednerstu'

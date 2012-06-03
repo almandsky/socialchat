@@ -663,14 +663,14 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
                 history.push(obj);
 	            history = history.slice(-100);
 	
-	
+	/*
 		      	db.chathistory2.save(obj, function(err, saved) {
 					  if( err || !saved ) console.log((new Date()) + "Chat History not saved");
 					  else {
 						 console.log((new Date()) + "Chat History saved");
 					  }
 			      });
-			
+	*/		
 			
 	          } else {
 				
@@ -703,6 +703,12 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
           // push back user's color to be reused by another user
           //colors.push(userColor);
       }
+
+      // Reset the user data
+	  userName = false;
+	  userID = false;
+	  userType = false;
+	  userPhoto = false;
 
   });
 });

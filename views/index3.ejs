@@ -28,7 +28,23 @@
 			username = user.google.name;
 			userid = user.google.id;
 			acctype = 'google';
+		} else if (user.yahoo){
+			picture = user.yahoo.image.imageUrl;
+			username = user.yahoo.nickname;
+			userid = user.yahoo.guid;
+			acctype = 'yahoo';
+		} else if (user.linkedin){
+			picture = user.linkedin.pictureUrl;
+			username = user.linkedin.firstName;
+			userid = user.linkedin.publicProfileUrl;
+			acctype = 'linkedin';
+		} else if (user.twitter){
+			picture = user.twitter.profile_image_url;
+			username = user.twitter.name;
+			userid = user.twitter.screen_name;
+			acctype = 'twitter';
 		}
+		
 	}
 
 	%>
@@ -211,8 +227,13 @@
 	    <h1>Social Chat</h1>
         <h2>Welcome, please login and join the chat:</h2>
         <!--a href="http://ec2-72-44-39-177.compute-1.amazonaws.com/"><img height="22px" src="/images/fb-login.png"/></a> <br/-->
-        <a href="/auth/facebook"><img height="22px" src="/images/fb-login.png"/></a> <br/>
-        <a href="/auth/google"><img height="22px" src="/images/google-login.png"/></a>
+        <a href="/auth/facebook"><img height="22px" src="/images/fb-login.png"/></a>  
+        <a href="/auth/google"><img height="22px" src="/images/google-login.png"/></a>  
+        <a href="/auth/yahoo"><img height="22px" src="http://l.yimg.com/a/i/reg/openid/buttons/1_new.png"/></a>
+        <a href="/auth/linkedin"><img height="22px" src="http://press.linkedin.com/sites/all/themes/presslinkedin/images/LinkedIn_WebLogo_LowResExample.jpg"/></a>
+        <a href="/auth/twitter"><img height="22px" src="http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png"/></a>
+
+
         <!--div class="fb-login-button" data-scope="user_likes,user_photos"> </div-->
 	 <!--img width="71px" src="https://richi.com/images/ya_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/go_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/pl_login.jpg"-->
 	     <br/>
