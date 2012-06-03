@@ -639,7 +639,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
               // get random color and send it back to the user
               //userColor = colors.shift();
               //connection.sendUTF(JSON.stringify({ type:'color', data: userColor }));
-              socket.json.send({ type:'user', data: userID });
+              socket.json.send({ type:'user', data: tempobj });
               console.log((new Date()) + ' User is known as: ' + userName
                           + ' with id ' + userID );
 
@@ -663,14 +663,14 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
                 history.push(obj);
 	            history = history.slice(-100);
 	
-	/*
+	
 		      	db.chathistory2.save(obj, function(err, saved) {
 					  if( err || !saved ) console.log((new Date()) + "Chat History not saved");
 					  else {
 						 console.log((new Date()) + "Chat History saved");
 					  }
 			      });
-	*/		
+			
 			
 	          } else {
 				

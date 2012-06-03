@@ -106,7 +106,7 @@ $(function () {
           // NOTE: if you're not sure about the JSON structure
           // check the server source code above
           if (json.type === 'user') { // first response from the server with user's color
-              //console.log(json);
+              //console.log(json.data);
               myID = json.data;
               //status.text(myName + ': ').css('color', myColor);
               input.removeAttr('disabled').focus();
