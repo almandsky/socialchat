@@ -703,7 +703,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
               };
               
 		 	  // Only send back the message without the '|'
-              if (message.indexOf('|') < 0){
+              if (message.indexOf('{ &quot;author&quot;: &quot;undefined&quot;') < 0){
 
                 history.push(obj);
 	            history = history.slice(-100);
