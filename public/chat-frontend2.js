@@ -13,6 +13,8 @@ $(function () {
     //For user listing
     var userstatus =  $('#userstatus');
     var userlist =  $('#userlist');
+    var totaluser =  $('#totaluser');
+
 
     // my ID assigned by the server
     var myID = false;
@@ -149,6 +151,8 @@ $(function () {
 
 		  } else if (json.type === 'userlist') { // entire message history
 	          userlist.empty();
+	
+	          totaluser.text('There are ' + json.data.length + ' users currently in this chat room including you. Click here to see who they are.');
 
               for (var i=0; i < json.data.length; i++) {
                   addUser(json.data[i].acctype, json.data[i].author,
@@ -372,7 +376,7 @@ $(function () {
 	
 
 
-			userlist.append('<li id="' + acc_type + acc_id + ' " class="friends"><a href="' + userlink + '" target="_top"><img style="width:20px" src="' + user_img + '">' + userdisplayname + '</a></li>');
+			userlist.append('<div id="' + acc_type + acc_id + ' " class="friends"><a href="' + userlink + '" target="_top"><img style="width:20px" src="' + user_img + '">' + userdisplayname + '</a></div>');
 	        
 	
 	
