@@ -97,6 +97,15 @@ everyauth
   .facebook
     .appId(conf.fb.appId)
     .appSecret(conf.fb.appSecret)
+    .handleAuthCallbackError( function (req, res) {
+	    // If a user denies your app, Facebook will redirect the user to
+	    // /auth/facebook/callback?error_reason=user_denied&error=access_denied&error_description=The+user+denied+your+request.
+	    // This configurable route handler defines how you want to respond to
+	    // that.
+	    // If you do not configure this, everyauth renders a default fallback
+	    // view notifying the user that their authentication failed and why.
+	    res.redirect('/');
+	  })
     .findOrCreateUser( function (session, accessToken, accessTokenExtra, fbUserMetadata) {
       return usersByFbId[fbUserMetadata.id] ||
         (usersByFbId[fbUserMetadata.id] = addUser('facebook', fbUserMetadata));
@@ -107,6 +116,15 @@ everyauth
   .twitter
     .consumerKey(conf.twit.consumerKey)
     .consumerSecret(conf.twit.consumerSecret)
+	.handleAuthCallbackError( function (req, res) {
+	    // If a user denies your app, Google will redirect the user to
+	    // /auth/facebook/callback?error=access_denied
+	    // This configurable route handler defines how you want to respond to
+	    // that.
+	    // If you do not configure this, everyauth renders a default fallback
+	    // view notifying the user that their authentication failed and why.
+	    res.redirect('/');
+	  })
     .findOrCreateUser( function (sess, accessToken, accessSecret, twitUser) {
       return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
     })
@@ -214,6 +232,15 @@ everyauth.gowalla
 everyauth.linkedin
   .consumerKey(conf.linkedin.apiKey)
   .consumerSecret(conf.linkedin.apiSecret)
+  .handleAuthCallbackError( function (req, res) {
+    // If a user denies your app, Google will redirect the user to
+    // /auth/facebook/callback?error=access_denied
+    // This configurable route handler defines how you want to respond to
+    // that.
+    // If you do not configure this, everyauth renders a default fallback
+    // view notifying the user that their authentication failed and why.
+    res.redirect('/');
+  })
   .findOrCreateUser( function (sess, accessToken, accessSecret, linkedinUser) {
     return usersByLinkedinId[linkedinUser.id] || (usersByLinkedinId[linkedinUser.id] = addUser('linkedin', linkedinUser));
   })
@@ -223,6 +250,15 @@ everyauth.google
   .appId(conf.google.clientId)
   .appSecret(conf.google.clientSecret)
   .scope('https://www.googleapis.com/auth/userinfo.profile https://www.google.com/m8/feeds/')
+  .handleAuthCallbackError( function (req, res) {
+    // If a user denies your app, Google will redirect the user to
+    // /auth/facebook/callback?error=access_denied
+    // This configurable route handler defines how you want to respond to
+    // that.
+    // If you do not configure this, everyauth renders a default fallback
+    // view notifying the user that their authentication failed and why.
+    res.redirect('/');
+  })
   .findOrCreateUser( function (sess, accessToken, extra, googleUser) {
     googleUser.refreshToken = extra.refresh_token;
     googleUser.expiresIn = extra.expires_in;
@@ -441,7 +477,7 @@ var app = express.createServer(
 
 app.configure(function() {
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
+  app.set('view engine', 'jade');
   app.use(express.logger());
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser());
@@ -478,15 +514,13 @@ app.get('/', function(req, res){
   console.log("req.user object is: =====================================================");
   console.dir(req.user);
 
-  res.render('index3', { 
+  res.render('index3.ejs', { 
 	layout:    false,
     req:       req,
     app:       app,
     user: req.user 
   });
 });
-
-
 
 
 app.get('/logout', function(req, res){

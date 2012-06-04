@@ -1,0 +1,12 @@
+!!! 5
+html
+  head
+    title= typeof(title) !== 'undefined' ? title : "Authentication Failed."
+    script(src='http://static.ak.fbcdn.net/connect/en_US/core.js')
+    - var html = "<script type='text/javascript'>window.location = '/'</script>"
+    | !{html}
+  body
+    h1 Authentication Failed.
+    #main
+      != body
+
