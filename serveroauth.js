@@ -588,6 +588,8 @@ io.sockets.on('connection', function (socket) {
   var userPhoto = false;
   // send back chat history
 
+  var clientdata = false;
+
   // Array with some colors
 var colors = [ 'red', 'green', 'blue', 'magenta', 'purple', 'plum', 'orange' ];
 // ... in random order
@@ -599,7 +601,13 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
       console.log((new Date()) + ' bradcast the history');
       socket.json.send({ type: 'history', data: history });
   }
+
+  if (clients.length > 0) {
+	  console.log((new Date()) + ' bradcast the user list');
+      socket.json.send({ type: 'userlist', data: clients });
+  }
   
+
 
 /*
   socket.on('history', function (message) {
@@ -639,9 +647,12 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
               // get random color and send it back to the user
               //userColor = colors.shift();
               //connection.sendUTF(JSON.stringify({ type:'color', data: userColor }));
+			  
+			
               socket.json.send({ type:'user', data: tempobj });
               console.log((new Date()) + ' User is known as: ' + userName
                           + ' with id ' + userID );
+
 
           } else { // log and broadcast the message
               console.log((new Date()) + ' Received Message from '
@@ -693,22 +704,57 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 	
   });
 
+  //User login event
+  socket.on('userlogedin', function (userdata) { 
+      //console.log((new Date()) + "recived data of user loged in ----------------------------------------------------------");
+	  //console.dir(userdata);
+	
+	 if (userdata.userid === 'undefined'){
+		userdata.userid = 'anonymous' + (new Date()).getTime();
+	 }
+	
+	  clients.push(userdata) -1;
+	  clientdata = userdata;
+      //console.log((new Date()) + "curent user data is ----------------------------------------------------------" + clientdata);
+      //console.log((new Date()) + "user list is now ========================================================");
+	  //console.dir(clients);
 
-  socket.on('disconnect', function (connection) { 
-      if (userName !== false && userID !== false) {
-          console.log((new Date()) + " Peer "
-              + connection + " disconnected.");
-          // remove user from the list of connected clients
-          //clients.splice(index, 1);
-          // push back user's color to be reused by another user
-          //colors.push(userColor);
-      }
+	  socket.json.send({ type:'userjoined', data: userdata });
+      socket.broadcast.json.send({ type:'userjoined', data: userdata });
+      
 
-      // Reset the user data
-	  userName = false;
-	  userID = false;
-	  userType = false;
-	  userPhoto = false;
+      //Broadcast the new list
+      socket.json.send({ type: 'userlist', data: clients });
+      socket.broadcast.json.send({ type:'userlist', data: clients });
+
+	  
 
   });
+
+
+	socket.on('disconnect', function (connection) { 
+	      if (userName !== false && userID !== false) {
+	          console.log((new Date()) + " Peer "
+	              + connection + " disconnected.");
+	          // remove user from the list of connected clients
+	          //clients.splice(index, 1);
+	          // push back user's color to be reused by another user
+	          //colors.push(userColor);
+	      }
+
+	      //console.log((new Date()) + 'the disconnected user data is : +++++++++++++++++++++++++++++++++' + clientdata);
+
+		  if (clientdata !== false) {
+		  	clients.splice(clients.indexOf(clientdata), 1);
+		    clientdata = false;
+		  }
+
+	      // Reset the user data
+		  userName = false;
+		  userID = false;
+		  userType = false;
+		  userPhoto = false;
+
+	  });
+
 });
