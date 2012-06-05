@@ -589,8 +589,15 @@ db.chathistory2.find(function(err, chathistory2) {
   if( err || !chathistory2) console.log((new Date()) + "No chat history found");
   else chathistory2.forEach( function(loadhistory) {
     //console.log(loadhistory);
-    if (loadhistory.text.indexOf('|') < 0){
+    if (loadhistory.text.indexOf('{ &quot;author&quot;:') < 0){
         history.push(loadhistory);
+    } else {
+	   //remove this invalid record
+	   var temptime = loadhistory.time;
+	   db.chathistory2.remove({time: temptime}, function(err, deleted) {
+		  if( err || !deleted ) console.log((new Date()) + "invalid chat history not deleted");
+		  else console.log((new Date()) + "invalid chat history deleted");
+		});
     }
   } );
   console.log((new Date()) + ' All chat history data loaded');
@@ -703,7 +710,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
               };
               
 		 	  // Only send back the message without the '|'
-              if (message.indexOf('{ &quot;author&quot;:') < 0){
+              if (message.indexOf('{ "author":') < 0){
 
                 history.push(obj);
 	            history = history.slice(-100);
