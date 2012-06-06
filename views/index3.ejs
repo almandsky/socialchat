@@ -188,7 +188,8 @@
 		<div><input id="userid" type="hidden" value="<%= userid %>">
 		<input id="username" type="hidden" value="<%= username %>">
 		<input id="userpicture" type="hidden" value="<%= picture %>">
-		<input id="acctype" type="hidden" value="<%= acctype %>"></div>
+		<input id="acctype" type="hidden" value="<%= acctype %>">
+		<input id="room" type="hidden" value="<%= room %>"></div>
 		<div align="right"> <a href="/logout">Log out</a></div>
 
         <!--
@@ -267,6 +268,8 @@
 
 	<section id="guides" class="clearfix">
 		<hr/>
+		<h2>You are now in chat room: <%= room %></h2>
+		<hr/>
 	    <a href="#onlineuser"><span id="totaluser"></span></a>
 	    <hr/>
         <div id="content"></div>
@@ -297,9 +300,9 @@
 	    <span id="userstatus" style="color:grey"></span>
 	    <p/>
         <div id="userlistdiv">
-	    <a name=onlineuser><h2>Online user list:</h2></a> 
-		<div id="userlist">
-        </div>
+	   	    <a name=onlineuser><h2>Online users:</h2></a> 
+			<div id="userlist">
+	        </div>
         </div>
     </section>
 

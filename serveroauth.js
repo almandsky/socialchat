@@ -507,6 +507,18 @@ app.dynamicHelpers({
 
 
 app.get('/', function(req, res){
+	
+	
+	var roomname = req.query.room;
+
+    if (roomname) {
+	    console.log("get room paramter: " + roomname);
+        //res.redirect('/');
+    } else {
+	    roomname = 'public';
+        console.log("user default room name: " + roomname);
+    }
+	
 //  console.log("app object is: =====================================================");
 //  console.dir(app);	
 //  console.log("req object is: =====================================================");
@@ -518,7 +530,8 @@ app.get('/', function(req, res){
 	layout:    false,
     req:       req,
     app:       app,
-    user: req.user 
+    user: req.user,
+    room: roomname
   });
 });
 
@@ -527,6 +540,21 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+
+// For the room parameter
+/*
+app.get('/room', function(req, res, next){
+    var room = req.query.room;
+    if (room) {
+	    console.log("get room paramter: " + room);
+        //res.redirect('/');
+    } else {
+        next();
+    }
+});
+*/
+
 
 
 //Add socket.io
