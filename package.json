@@ -1,5 +1,21 @@
 {
-  "name":"fbwebsocket",
+  "name":"socialchat",
   "node":"0.6.17",
-  "author":"almandsky"
+  "author":"almandsky",
+  "dependencies": {
+    "async": "0.1.21",
+    "ejs": "0.7.1",
+    "everyauth": "0.2.32",
+    "express": "2.5.9",
+    "mongojs": "0.4.3",
+    "socket.io": "0.9.6"
+  },
+  "keywords": [
+    "social",
+    "chat",
+    "websocket",
+    "node",
+    "oauth"
+  ],
+  "main": "serveroath"
 }
