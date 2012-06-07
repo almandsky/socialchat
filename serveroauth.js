@@ -268,6 +268,10 @@ everyauth.google
     // view notifying the user that their authentication failed and why.
     res.redirect('/');
   })
+  .moduleErrback( function(err) {
+    console.log("moduleErrback for google", err);
+    res.redirect('/');
+  })
   .findOrCreateUser( function (sess, accessToken, extra, googleUser) {
     googleUser.refreshToken = extra.refresh_token;
     googleUser.expiresIn = extra.expires_in;
