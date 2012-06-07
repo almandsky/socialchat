@@ -129,7 +129,7 @@ everyauth
 	  })
 	.moduleErrback( function(err) {
 	    console.log("moduleErrback for twitter", err);
-	    res.redirect('/');
+	    //res.redirect('/');
 	})
     .findOrCreateUser( function (sess, accessToken, accessSecret, twitUser) {
       return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
