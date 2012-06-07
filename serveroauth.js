@@ -70,6 +70,8 @@ everyauth.everymodule
     callback(null, usersById[id]);
   });
 
+/*
+
 everyauth.azureacs
   .identityProviderUrl('https://acssample1.accesscontrol.windows.net/v2/wsfederation/')
   .entryPath('/auth/azureacs')
@@ -92,7 +94,7 @@ everyauth
     })
     .redirectPath('/');
 
-
+*/
 everyauth
   .facebook
     .appId(conf.fb.appId)
@@ -129,6 +131,8 @@ everyauth
       return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
     })
     .redirectPath('/');
+
+/*
 
 everyauth
   .password
@@ -193,6 +197,11 @@ everyauth
     .loginSuccessRedirect('/')
     .registerSuccessRedirect('/');
 
+
+*/
+
+/*
+
 everyauth.github
   .appId(conf.github.appId)
   .appSecret(conf.github.appSecret)
@@ -245,7 +254,7 @@ everyauth.linkedin
     return usersByLinkedinId[linkedinUser.id] || (usersByLinkedinId[linkedinUser.id] = addUser('linkedin', linkedinUser));
   })
   .redirectPath('/');
-
+*/
 everyauth.google
   .appId(conf.google.clientId)
   .appSecret(conf.google.clientSecret)
@@ -266,6 +275,18 @@ everyauth.google
   })
   .redirectPath('/');
 
+
+everyauth.yahoo
+  .consumerKey(conf.yahoo.consumerKey)
+  .consumerSecret(conf.yahoo.consumerSecret)
+  .findOrCreateUser( function (sess, accessToken, accessSecret, yahooUser) {
+    return usersByYahooId[yahooUser.id] || (usersByYahooId[yahooUser.id] = addUser('yahoo', yahooUser));
+  })
+  .redirectPath('/');
+
+/*
+
+
 everyauth.angellist
   .appId(conf.angellist.clientId)
   .appSecret(conf.angellist.clientSecret)
@@ -276,13 +297,6 @@ everyauth.angellist
   })
   .redirectPath('/');
 
-everyauth.yahoo
-  .consumerKey(conf.yahoo.consumerKey)
-  .consumerSecret(conf.yahoo.consumerSecret)
-  .findOrCreateUser( function (sess, accessToken, accessSecret, yahooUser) {
-    return usersByYahooId[yahooUser.id] || (usersByYahooId[yahooUser.id] = addUser('yahoo', yahooUser));
-  })
-  .redirectPath('/');
 
 everyauth.googlehybrid
   .myHostname('http://local.host:3000')
@@ -373,7 +387,7 @@ everyauth.vkontakte
       (usersByVkId[vkUserMetadata.uid] = addUser('vkontakte', vkUserMetadata));
   })
   .redirectPath('/');
-/*
+
 everyauth.mailru
   .appId(conf.mailru.appId)
   .appSecret(conf.mailru.appSecret)
@@ -382,7 +396,8 @@ everyauth.mailru
       (usersMailruId[mlUserMetadata.uid] = addUser('mailru', mlUserMetadata));
   })
   .redirectPath('/');
-*/
+
+
 everyauth.skyrock
   .consumerKey(conf.skyrock.consumerKey)
   .consumerSecret(conf.skyrock.consumerSecret)
@@ -416,6 +431,7 @@ everyauth['500px']
     return usersBy500pxId[user.id] || (usersBy500pxId[user.id] = addUser('500px', user));
   })
   .redirectPath('/');
+*/
 
 /*
 everyauth.mendeley
@@ -587,6 +603,9 @@ function ensureAuthenticated(req, res, next) {
 var history = [ ];
 // list of currently connected clients (users)
 var clients = [ ];
+
+// list of rooms
+var rooms = [ ];
 
 /**
  * Helper function for escaping input strings
@@ -800,6 +819,30 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 
   });
 
+  //Room Created event
+  socket.on('roomcreated', function (roomdata) { 
+      //console.log((new Date()) + "recived data of user loged in ----------------------------------------------------------");
+	  //console.dir(userdata);
+	
+	 if (roomdata.roomname === 'undefined'){
+		roomdata.roomname = 'public';
+	 }
+	
+	  rooms.push(roomdata) -1;
+	  roomrecord = roomdata;
+
+
+	  socket.json.send({ type:'roomcreated', data: roomdata });
+      socket.broadcast.json.send({ type:'roomcreated', data: roomdata });
+      
+
+      //Broadcast the new list
+      socket.json.send({ type: 'roomlist', data: rooms });
+      socket.broadcast.json.send({ type:'roomlist', data: rooms });
+
+	  
+
+  });
 
 	socket.on('disconnect', function (connection) { 
 	      if (userName !== false && userID !== false) {
