@@ -127,6 +127,10 @@ everyauth
 	    // view notifying the user that their authentication failed and why.
 	    res.redirect('/');
 	  })
+	.moduleErrback( function(err) {
+	    console.log("moduleErrback for twitter", err);
+	    res.redirect('/');
+	})
     .findOrCreateUser( function (sess, accessToken, accessSecret, twitUser) {
       return usersByTwitId[twitUser.id] || (usersByTwitId[twitUser.id] = addUser('twitter', twitUser));
     })
