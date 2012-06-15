@@ -3,8 +3,6 @@ var express = require('express')
   , util = require('util')
   , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-//enable gzip
-var gzippo = require('gzippo');
 
 var everyauth = require('everyauth');
 var conf = require('./conf');
@@ -506,9 +504,7 @@ app.configure(function() {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.logger());
-  //enable gzip
-  //app.use(express.static(__dirname + '/public'));
-  app.use(gzippo.staticGzip(__dirname + '/public'));
+  app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
