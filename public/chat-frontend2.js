@@ -60,7 +60,7 @@ $(function () {
 
 		socket.send(tempmsgjson);
         myName=username.val();
-        console.log("User name is: " + myName + '.  I am from ' + acctype.val());
+        //console.log("User name is: " + myName + '.  I am from ' + acctype.val());
 	    
         //console.log("connection built from client");
         //input.removeAttr('disabled');
@@ -207,7 +207,7 @@ $(function () {
 	
 		socket.on('disconnect', function(myName) {
 		  	
-			console.log('disconnected');
+			//console.log('disconnected');
 			input.val('Server disconnected.');
 			input.attr('disabled', 'disabled');
 			userlist.empty();
@@ -283,6 +283,10 @@ $(function () {
 			
 			if (acc_type === undefined || acc_type === 'undefined'){
 		        acc_type = '';
+			}
+
+			if (user_img === undefined || user_img === 'undefined'){
+		        user_img = '';
 			}
 			
 	
