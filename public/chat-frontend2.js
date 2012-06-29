@@ -152,7 +152,7 @@ $(function () {
 		  } else if (json.type === 'userlist') { // entire message history
 	          userlist.empty();
 	
-	          totaluser.text('There are ' + json.data.length + ' users currently in this chat room including you. Click here to see who they are.');
+	          totaluser.text(json.data.length);
 
               for (var i=0; i < json.data.length; i++) {
                   addUser(json.data[i].acctype, json.data[i].author,
