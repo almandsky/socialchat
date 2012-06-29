@@ -1,0 +1,8 @@
+Sitemap: http://chat.skychen.com/sitemap.xml
+
+# login page
+User-agent: *
+Disallow: /auth/facebook
+Disallow: /auth/google
+Disallow: /auth/yahoo
+Disallow: /auth/twitter
