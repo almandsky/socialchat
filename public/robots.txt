@@ -1,6 +1,9 @@
+# This file was generated on Fri, 29 Jun 2012 05:36:40 +0000
+
 Sitemap: http://chat.skychen.com/sitemap.xml
 
-# login page
+User-agent: IRLbot
+Crawl-delay: 3600
+
 User-agent: *
 Disallow: /auth/
-
