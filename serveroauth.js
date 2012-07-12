@@ -665,21 +665,21 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
  */
 console.log((new Date()) + ' Preparing for DB Conection');
 var databaseUrl = "mongodb://nodejitsu:a5ca3279a71b623cafcb04bfe509f0cf@staff.mongohq.com:10025/nodejitsudb34997110727"; 
-var collections = ["chathistory2"]
+var collections = ["chathistory3"]
 var db = require("mongojs").connect(databaseUrl, collections);
 
 console.log((new Date()) + ' DB Conected.  Fetching data');
 
-db.chathistory2.find(function(err, chathistory2) {
-  if( err || !chathistory2) console.log((new Date()) + "No chat history found");
-  else chathistory2.forEach( function(loadhistory) {
+db.chathistory3.find(function(err, chathistory3) {
+  if( err || !chathistory3) console.log((new Date()) + "No chat history found");
+  else chathistory3.forEach( function(loadhistory) {
     //console.log(loadhistory);
     if (loadhistory.text.indexOf('{ &quot;author&quot;:') < 0){
         history.push(loadhistory);
     } else {
 	   //remove this invalid record
 	   var temptime = loadhistory.time;
-	   db.chathistory2.remove({time: temptime}, function(err, deleted) {
+	   db.chathistory3.remove({time: temptime}, function(err, deleted) {
 		  if( err || !deleted ) console.log((new Date()) + "invalid chat history not deleted");
 		  else console.log((new Date()) + "invalid chat history deleted");
 		});
@@ -801,7 +801,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 	            history = history.slice(-100);
 	
 	
-		      	db.chathistory2.save(obj, function(err, saved) {
+		      	db.chathistory3.save(obj, function(err, saved) {
 					  if( err || !saved ) console.log((new Date()) + "Chat History not saved");
 					  else {
 						 console.log((new Date()) + "Chat History saved");
