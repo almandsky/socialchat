@@ -560,6 +560,35 @@ app.get('/', function(req, res){
   });
 });
 
+app.post('/', function(req, res){
+	
+	
+	var roomname = req.query.room;
+
+    if (roomname) {
+	    console.log("get room paramter: " + roomname);
+        //res.redirect('/');
+    } else {
+	    roomname = 'public';
+        console.log("user default room name: " + roomname);
+    }
+	
+//  console.log("app object is: =====================================================");
+//  console.dir(app);	
+//  console.log("req object is: =====================================================");
+//  console.dir(req);
+  console.log("req.user object is: =====================================================");
+  console.dir(req.user);
+
+  res.render('index3.ejs', { 
+	layout:    false,
+    req:       req,
+    app:       app,
+    user: req.user,
+    room: roomname
+  });
+});
+
 
 app.get('/logout', function(req, res){
   req.logout();
