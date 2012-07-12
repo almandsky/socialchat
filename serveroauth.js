@@ -560,6 +560,8 @@ app.get('/', function(req, res){
   });
 });
 
+
+
 app.post('/', function(req, res){
 	
 	
@@ -593,6 +595,29 @@ app.post('/', function(req, res){
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
+});
+
+
+// For Privacy Policy page
+
+app.get('/privacy', function(req, res){
+  res.render('privacy.ejs', { 
+	layout:    false,
+    req:       req,
+    app:       app,
+    user: req.user
+  });
+});
+
+// For Terms of Service page
+
+app.get('/terms', function(req, res){
+  res.render('terms.ejs', { 
+	layout:    false,
+    req:       req,
+    app:       app,
+    user: req.user
+  });
 });
 
 

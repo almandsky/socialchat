@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 
-    <title>Social Chat</title>
-	<meta name='description' content='Real time Social Chat room on Node.js, support multiple Social Networks logins.  My name is Sky Chen. Here is my blog: http://almandsky.wordpress.com/. I works as QE Manager in Yahoo! Taiwan.' />
-    <link rel="canonical" href="http://chat.skychen.com" />
+    <title>Social Chat - Privacy Policies</title>
+	<meta name='description' content='Privacy Policies of Social Chat - Real time Social Chat room on Node.js, support multiple Social Networks logins.  My name is Sky Chen. Here is my blog: http://almandsky.wordpress.com/. I works as QE Manager in Yahoo! Taiwan.' />
+    <link rel="canonical" href="http://chat.skychen.com/privacy" />
     <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
     <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
 
@@ -16,43 +16,7 @@
     <link rel="stylesheet" href="mobile.css" media="screen" type="text/css"  />
     <![endif]-->
 
-	<%
-
-	var picture = false;
-	var userid = false;
-	var username = false;
-	var acctype = false;
-	if (user) {
-		if (user.facebook){
-			picture = 'http://graph.facebook.com/' + user.facebook.id + '/picture?type=square';
-			username = user.facebook.name;
-			userid = user.facebook.id;
-			acctype = 'facebook';
-		} else if (user.google){
-			picture = user.google.picture;
-			username = user.google.name;
-			userid = user.google.id;
-			acctype = 'google';
-		} else if (user.yahoo){
-			picture = user.yahoo.image.imageUrl;
-			username = user.yahoo.nickname;
-			userid = user.yahoo.guid;
-			acctype = 'yahoo';
-		} else if (user.linkedin){
-			picture = user.linkedin.pictureUrl;
-			username = user.linkedin.firstName;
-			userid = user.linkedin.publicProfileUrl;
-			acctype = 'linkedin';
-		} else if (user.twitter){
-			picture = user.twitter.profile_image_url;
-			username = user.twitter.name;
-			userid = user.twitter.screen_name;
-			acctype = 'twitter';
-		}
-		
-	}
-
-	%>
+	
 
 
 
@@ -130,7 +94,7 @@
 
     
     <script src="http://chat.skychen.com/socket.io/socket.io.v0.9.6.js"></script>
-    <script src="/chat-frontend2.js"></script>
+    <!--script src="/chat-frontend2.js"></script-->
 
     <!--[if IE]>
       <script type="text/javascript">
@@ -179,72 +143,15 @@
     </script>
 
     <header class="clearfix">
-      <% if (user) { %>
-      <p id="picture" style="background-image: url(<%= picture %>)"></p>
-           
+      
       <div>
-	    <h1>Social Chat (<%= acctype %>)</h1>
-        <h2>Welcome, <strong><%= username %></strong></h2>
-		<div><input id="userid" type="hidden" value="<%= userid %>">
-		<input id="username" type="hidden" value="<%= username %>">
-		<input id="userpicture" type="hidden" value="<%= picture %>">
-		<input id="acctype" type="hidden" value="<%= acctype %>">
-		<input id="room" type="hidden" value="<%= room %>"></div>
-		<div align="right"> <a href="/logout">Log out</a></div>
-
-        <!--
-        <p class="tagline">
-          This is your app
-          <a href="<%= app.link %>" target="_top"><%= app.name %></a>
-        </p>
-
-        <div id="share-app">
-          <p>Share your app:</p>
-          <ul>
-            <li>
-              <a href="#" class="facebook-button" id="postToWall" data-url="<%= scheme %><%= url_no_scheme('') %>">
-                <span class="plus">Post to Wall</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<%= scheme %><%= url_no_scheme('') %>">
-                <span class="speech-bubble">Send Message</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
-                <span class="apprequests">Send Requests</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        -->
-      </div>
-      <div class="fb-like" data-href="http://chat.skychen.com/" data-send="false" data-width="300" data-show-faces="false"></div>
-      <g:plusone></g:plusone>
-	
-      <% } else { %>
-      <div>
-	    <h1>Social Chat</h1>
-        <h2>Welcome, please login and join the chat:</h2>
+	    <h1>Social Chat - Privacy Policies</h1>
         
-        <a href="/auth/facebook"><img height="22" alt="facebook login" src="/images/fb-login.png"/></a>  
-        <a href="/auth/google"><img height="22" alt="google login" src="/images/google-login.png"/></a>  
-        <a href="/auth/yahoo"><img height="22" alt="yahoo login" src="http://l.yimg.com/a/i/reg/openid/buttons/1_new.png"/></a>
-        <!--a href="/auth/linkedin"><img height="22px" src="http://press.linkedin.com/sites/all/themes/presslinkedin/images/LinkedIn_WebLogo_LowResExample.jpg"/></a-->
-        <a href="/auth/twitter"><img height="22" alt="twitter login"  src="http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png"/></a>
-
-
-        <!--div class="fb-login-button" data-scope="user_likes,user_photos"> </div-->
-	 <!--img width="71px" src="https://richi.com/images/ya_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/go_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/pl_login.jpg"-->
-	     <br/>
-
       </div>
 
 	  <div class="fb-like" data-href="http://chat.skychen.com/" data-send="false" data-width="300" data-show-faces="false"></div>
 	  <g:plusone></g:plusone>
 	
-      <% } %>
       <script type="text/javascript">
 	      window.___gcfg = {
 	        lang: 'en-US'
@@ -267,44 +174,37 @@
     -->
 
 	<section id="guides" class="clearfix">
-		<hr/>
-		<h2>You are now in chat room: <%= room %></h2>
-		<hr/>
-	    There are <b style="color:red"><span id="totaluser"></span></b> users currently in this chat room including you. Go to the <a href="#onlineuser" alt="online users">Online Users</a> section to see who they are.
-	    <hr/>
-        <div id="content"></div>
+	    <div id="content">
+	    	
+			<h2>Privacy Policies</h2>
+	          <p>
+	            July 12, 2012
+	          </p>
+	          <p>  
+	            Social Chat is built from the ground up with your privacy and security in mind.
+	          </p>
+	          <h2>Overview</h2>
+	          <p>
+	            It's simple. Any information we capture from you (IP address, browser version, social networks login ID, etc.) <b>will not be</b> shared with anyone else. 
+	  We won't use it for anything either without your consent. <br>
+	          </p>
+	          <h2>No social networks Profile Data Stored on Our Servers</h2>
+	          <p>
+	            We are not storing any of your social networks profile data on our server. 
+	  This is less infomration than shared by your social networks on your public social networks profile page.
+	          </p>
+	          <h2>No Anonymous Chat</h2>
+	          <p>
+	            When you login to chat, your partner will see your name and your social networks profile picture. 
+	  No other information will be shared.
+	          </p>
+	
+	    </div>
     </section>
 
-    <% if (user) { %>
+    
 
-    <section id="samples" class="clearfix">
-      <div>
-	      Say something: <br/>
-          <input type="text" id="input" disabled="disabled" />
-      </div>
-      
-      
-    </section>
-
-    <% } else { %>
-     	<section id="samples" class="clearfix">
-		      <h2 style="color:red">Please click the login button above first to join the chat room</h2>
-	    </section>
-      <% } %>
-
-
-    <!-- User list -->
-
-
-	<section id="guides" class="clearfix">
-	    <span id="userstatus" style="color:grey"></span>
-		<hr/>
-        <div id="userlistdiv">
-	   	    <a name=onlineuser><h3>Online users:</h2></a> 
-			<div id="userlist">
-	        </div>
-        </div>
-    </section>
+    
 	<section id="guides" class="clearfix">
 		<div itemscope itemtype="http://data-vocabulary.org/Person">
 		<p>
@@ -314,7 +214,7 @@
     </section>
 	<section id="guides" class="clearfix">
 		<div style="text-align:center">
-	    <a href="http://chat.skychen.com" alt="Home">Home</a> | <a href="http://chat.skychen.com/privacy" alt="Privacy Policies">Privacy Policies</a> | <a href="http://chat.skychen.com/privacy" alt="Terms of Service">Terms of Service</a> | <a href="mailto:tianxiong_chen@hotmail.com" alt="Contact Us">Contact Us</a> | <a href="http://almandsky.wordpress.com/"alt="About Us">About Us</a>
+		<a href="http://chat.skychen.com" alt="Home">Home</a> | <a href="http://chat.skychen.com/privacy" alt="Privacy Policies">Privacy Policies</a> | <a href="http://chat.skychen.com/privacy" alt="Terms of Service">Terms of Service</a> | <a href="mailto:tianxiong_chen@hotmail.com" alt="Contact Us">Contact Us</a> | <a href="http://almandsky.wordpress.com/"alt="About Us">About Us</a>
 	    </div>
 		<div style="text-align:center">
 	    Copyright &copy; 2012 skychen.com All Rights Reserved.

@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
 
-    <title>Social Chat</title>
-	<meta name='description' content='Real time Social Chat room on Node.js, support multiple Social Networks logins.  My name is Sky Chen. Here is my blog: http://almandsky.wordpress.com/. I works as QE Manager in Yahoo! Taiwan.' />
-    <link rel="canonical" href="http://chat.skychen.com" />
+    <title>Social Chat - Terms of Service</title>
+	<meta name='description' content='Terms of Service of Social Chat - Real time Social Chat room on Node.js, support multiple Social Networks logins.  My name is Sky Chen. Here is my blog: http://almandsky.wordpress.com/. I works as QE Manager in Yahoo! Taiwan.' />
+    <link rel="canonical" href="http://chat.skychen.com/terms" />
     <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
     <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
 
@@ -16,43 +16,7 @@
     <link rel="stylesheet" href="mobile.css" media="screen" type="text/css"  />
     <![endif]-->
 
-	<%
-
-	var picture = false;
-	var userid = false;
-	var username = false;
-	var acctype = false;
-	if (user) {
-		if (user.facebook){
-			picture = 'http://graph.facebook.com/' + user.facebook.id + '/picture?type=square';
-			username = user.facebook.name;
-			userid = user.facebook.id;
-			acctype = 'facebook';
-		} else if (user.google){
-			picture = user.google.picture;
-			username = user.google.name;
-			userid = user.google.id;
-			acctype = 'google';
-		} else if (user.yahoo){
-			picture = user.yahoo.image.imageUrl;
-			username = user.yahoo.nickname;
-			userid = user.yahoo.guid;
-			acctype = 'yahoo';
-		} else if (user.linkedin){
-			picture = user.linkedin.pictureUrl;
-			username = user.linkedin.firstName;
-			userid = user.linkedin.publicProfileUrl;
-			acctype = 'linkedin';
-		} else if (user.twitter){
-			picture = user.twitter.profile_image_url;
-			username = user.twitter.name;
-			userid = user.twitter.screen_name;
-			acctype = 'twitter';
-		}
-		
-	}
-
-	%>
+	
 
 
 
@@ -130,7 +94,7 @@
 
     
     <script src="http://chat.skychen.com/socket.io/socket.io.v0.9.6.js"></script>
-    <script src="/chat-frontend2.js"></script>
+    <!--script src="/chat-frontend2.js"></script-->
 
     <!--[if IE]>
       <script type="text/javascript">
@@ -179,72 +143,14 @@
     </script>
 
     <header class="clearfix">
-      <% if (user) { %>
-      <p id="picture" style="background-image: url(<%= picture %>)"></p>
-           
+      
       <div>
-	    <h1>Social Chat (<%= acctype %>)</h1>
-        <h2>Welcome, <strong><%= username %></strong></h2>
-		<div><input id="userid" type="hidden" value="<%= userid %>">
-		<input id="username" type="hidden" value="<%= username %>">
-		<input id="userpicture" type="hidden" value="<%= picture %>">
-		<input id="acctype" type="hidden" value="<%= acctype %>">
-		<input id="room" type="hidden" value="<%= room %>"></div>
-		<div align="right"> <a href="/logout">Log out</a></div>
-
-        <!--
-        <p class="tagline">
-          This is your app
-          <a href="<%= app.link %>" target="_top"><%= app.name %></a>
-        </p>
-
-        <div id="share-app">
-          <p>Share your app:</p>
-          <ul>
-            <li>
-              <a href="#" class="facebook-button" id="postToWall" data-url="<%= scheme %><%= url_no_scheme('') %>">
-                <span class="plus">Post to Wall</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<%= scheme %><%= url_no_scheme('') %>">
-                <span class="speech-bubble">Send Message</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
-                <span class="apprequests">Send Requests</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        -->
-      </div>
-      <div class="fb-like" data-href="http://chat.skychen.com/" data-send="false" data-width="300" data-show-faces="false"></div>
-      <g:plusone></g:plusone>
-	
-      <% } else { %>
-      <div>
-	    <h1>Social Chat</h1>
-        <h2>Welcome, please login and join the chat:</h2>
-        
-        <a href="/auth/facebook"><img height="22" alt="facebook login" src="/images/fb-login.png"/></a>  
-        <a href="/auth/google"><img height="22" alt="google login" src="/images/google-login.png"/></a>  
-        <a href="/auth/yahoo"><img height="22" alt="yahoo login" src="http://l.yimg.com/a/i/reg/openid/buttons/1_new.png"/></a>
-        <!--a href="/auth/linkedin"><img height="22px" src="http://press.linkedin.com/sites/all/themes/presslinkedin/images/LinkedIn_WebLogo_LowResExample.jpg"/></a-->
-        <a href="/auth/twitter"><img height="22" alt="twitter login"  src="http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png"/></a>
-
-
-        <!--div class="fb-login-button" data-scope="user_likes,user_photos"> </div-->
-	 <!--img width="71px" src="https://richi.com/images/ya_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/go_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/pl_login.jpg"-->
-	     <br/>
-
+	    <h1>Social Chat - Terms of Service</h1>
       </div>
 
 	  <div class="fb-like" data-href="http://chat.skychen.com/" data-send="false" data-width="300" data-show-faces="false"></div>
 	  <g:plusone></g:plusone>
 	
-      <% } %>
       <script type="text/javascript">
 	      window.___gcfg = {
 	        lang: 'en-US'
@@ -267,44 +173,77 @@
     -->
 
 	<section id="guides" class="clearfix">
-		<hr/>
-		<h2>You are now in chat room: <%= room %></h2>
-		<hr/>
-	    There are <b style="color:red"><span id="totaluser"></span></b> users currently in this chat room including you. Go to the <a href="#onlineuser" alt="online users">Online Users</a> section to see who they are.
-	    <hr/>
-        <div id="content"></div>
+		<div id="content">
+			
+			<h3>Terms of Service</h3>  
+		         <p>
+		           July 12, 2012
+		         </p>
+		         <p>
+		           Your access to Social Chat Node is governed by the Social Chat Node terms of service. The terms of service, 
+		           including the Privacy and Security Policy, are subject to change solely at the discretion of Social Chat Node and its management.
+		         </p>
+		         <p>
+		           By using the Social Chat Node, you are agreeing to be legally bound by these Terms of Service. 
+		           If at any time you are not willing to be bound by all of these Terms of Service, then you must not use the Social Chat Node Service.
+		         </p>
+		          <p>&nbsp;</p>
+		         <h4>Your Account</h4>
+		         <p>
+		          You need to be 13+ to use  Social Chat Node.
+		          You need to have a valid social networks account. 
+		          Social Chat Node can refuse registration of at any time.
+		          Social Chat Node does not store any social networks account information on their servers.
+		         </p>
+		          <p>&nbsp;</p>
+		         <h4>Content and Intellectual Property</h4>
+		         <p>
+		           Social Chat Node owns the Social Chat Node Service as a whole, including all computer code, graphics, user interfaces and audiovisual
+		           content used to provide the Social Chat Node Service, and the combination of all the elements on the Social Chat Node Service.
+		        </p>
+		          <p>&nbsp;</p>
+		        <h4>Code of Conduct</h4>
+		        <p>
+		          We don't tollerate offensive, threatening, libelous, defamatory, and obscene behaviour.
+		        </p>
+		        <p>
+		          Social Chat Node has the right, but not the obligation, to block user that we determine in our sole discretion to behave be unlawful, 
+		          offensive, threatening, libelous, defamatory, obscene or otherwise objectionable,
+		          or that is detrimental to the quality or intended spirit of the Social Chat Node Service. Social Chat Node also has the right, but not the obligation,
+		          to limit or revoke the use privileges of the service of anyone who posts such Content.
+		        </p>
+		          <p>&nbsp;</p>
+		        <h4>General Terms</h4>
+		        <p>
+		          THE SOCIAL CHAT NODE SERVICE IS PROVIDED "AS IS" WITH NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS, STATUTORY OR IMPLIED, 
+		          AS TO THE OPERATION OF THE SOCIAL CHAT NODE SERVICE, OR THE INFORMATION, CONTENT, MATERIALS, OR PRODUCTS INCLUDED ON THE SOCIAL CHAT NODE SERVICE. 
+		    TO THE FULLEST EXTENT PERMISSIBLE BY APPLICABLE LAW, SOCIAL CHAT NODE AND ITS AFFILIATES DISCLAIM ALL WARRANTIES, EXPRESS,
+		    STATUTORY, OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+		    NON-INFRINGEMENT. FURTHER, SOCIAL CHAT NODE AND ITS AFFILIATES DO NOT WARRANT THE ACCURACY OR COMPLETENESS OF THE INFORMATION,
+		    TEXT, GRAPHICS, LINKS OR OTHER INFORMATION CONTAINED IN THE SOCIAL CHAT NODE SERVICE. SOME JURISDICTIONS DO NOT ALLOW LIMITATIONS
+		    ON IMPLIED WARRANTIES, SO THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU. SOCIAL CHAT NODE DOES NOT WARRANT THAT THE SATISFACTION
+		    SERVICE WILL BE AVAILABLE AT ANY TIME OR FROM ANY PARTICULAR LOCATION, WILL BE SECURE OR ERROR-FREE, THAT DEFECTS WILL BE
+		    CORRECTED, OR THAT THE SOCIAL CHAT NODE SERVICE IS FREE OF VIRUSES OR OTHER POTENTIALLY HARMFUL COMPONENTS. NO ADVICE OR
+		    INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED FROM SOCIAL CHAT NODE OR THE SOCIAL CHAT NODE SERVICE SHALL CREATE ANY WARRANTY
+		    NOT EXPRESSLY STATED IN THESE TERMS OF SERVICE.
+		        </p>
+		        <p> 
+		         SOCIAL CHAT NODE AND ITS AFFILIATES WILL NOT BE LIABLE UNDER
+		    ANY THEORY OF LAW, FOR ANY INDIRECT, INCIDENTAL, PUNITIVE, OR CONSEQUENTIAL DAMAGES, INCLUDING, BUT NOT LIMITED TO LOSS
+		    OF PROFITS, BUSINESS INTERRUPTION, AND/OR LOSS OF INFORMATION OR DATA. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR
+		    LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATIONS AND EXCLUSIONS MAY NOT APPLY TO YOU. 
+		    NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, SOCIAL CHAT NODE'S MAXIMUM AGGREGATE LIABILITY TO YOU FOR ANY CAUSES
+		    WHATSOEVER, AND REGARDLESS OF THE FORM OF ACTION, WILL AT ALL TIMES BE LIMITED TO THE AMOUNT PAID, IF ANY,
+		    BY YOU TO SOCIAL CHAT NODE FOR THE SOCIAL CHAT NODE SERVICE IN THE 12 MONTHS PRIOR TO THE ACTION GIVING RISE
+		    TO LIABILITY.
+		        </p>
+			
+		</div>
     </section>
 
-    <% if (user) { %>
+    
 
-    <section id="samples" class="clearfix">
-      <div>
-	      Say something: <br/>
-          <input type="text" id="input" disabled="disabled" />
-      </div>
-      
-      
-    </section>
-
-    <% } else { %>
-     	<section id="samples" class="clearfix">
-		      <h2 style="color:red">Please click the login button above first to join the chat room</h2>
-	    </section>
-      <% } %>
-
-
-    <!-- User list -->
-
-
-	<section id="guides" class="clearfix">
-	    <span id="userstatus" style="color:grey"></span>
-		<hr/>
-        <div id="userlistdiv">
-	   	    <a name=onlineuser><h3>Online users:</h2></a> 
-			<div id="userlist">
-	        </div>
-        </div>
-    </section>
+    
 	<section id="guides" class="clearfix">
 		<div itemscope itemtype="http://data-vocabulary.org/Person">
 		<p>
