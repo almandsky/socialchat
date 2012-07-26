@@ -530,6 +530,12 @@ app.dynamicHelpers({
 });
 
 
+function is_mobile(req) {
+    var ua = req.header('user-agent');
+    if (/mobile/i.test(ua)) return true;
+    else return false;
+};
+
 
 app.get('/', function(req, res){
 	
@@ -556,7 +562,8 @@ app.get('/', function(req, res){
     req:       req,
     app:       app,
     user: req.user,
-    room: roomname
+    room: roomname,
+    ismobile: is_mobile(req)
   });
 });
 
@@ -587,7 +594,8 @@ app.post('/', function(req, res){
     req:       req,
     app:       app,
     user: req.user,
-    room: roomname
+    room: roomname,
+    ismobile: is_mobile(req)
   });
 });
 
