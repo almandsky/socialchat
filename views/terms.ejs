@@ -142,6 +142,39 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
 
+	<% if (ismobile) { %>
+
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* Mobile Banner */
+		google_ad_slot = "0973657599";
+		google_ad_width = 320;
+		google_ad_height = 50;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+	<% } else { %>
+
+	<!-- ads -->
+	<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-9581795834127896";
+	/* myfirstads */
+	google_ad_slot = "5461474990";
+	google_ad_width = 728;
+	google_ad_height = 90;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+	
+	<% } %>
+
+
+
     <header class="clearfix">
       
       <div>
@@ -173,6 +206,9 @@
     -->
 
 	<section id="guides" class="clearfix">
+	<table >
+		<tr>
+			<td style="vertical-align:top;">
 		<div id="content">
 			
 			<h3>Terms of Service</h3>  
@@ -239,6 +275,30 @@
 		        </p>
 			
 		</div>
+		
+		</td>
+	
+		<% if (!ismobile) { %>
+	
+		<td style="vertical-align:top;">
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-9581795834127896";
+			/* sidebar */
+			google_ad_slot = "6058372133";
+			google_ad_width = 160;
+			google_ad_height = 600;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+		</td>
+	
+		<% } %>
+	
+	</tr>
+	</table>
+		
     </section>
 
     
@@ -337,6 +397,39 @@
 	  })();
 
 	</script>
+	
+	
+	<% if (ismobile) { %>
+
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* Mobile Banner */
+		google_ad_slot = "0973657599";
+		google_ad_width = 320;
+		google_ad_height = 50;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+	<% } else { %>
+
+	<!-- ads -->
+	<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-9581795834127896";
+	/* myfirstads */
+	google_ad_slot = "5461474990";
+	google_ad_width = 728;
+	google_ad_height = 90;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+	
+	<% } %>
+	
 	
 	<!--
 	<script type="text/javascript">

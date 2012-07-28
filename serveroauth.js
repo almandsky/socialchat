@@ -613,7 +613,8 @@ app.get('/privacy', function(req, res){
 	layout:    false,
     req:       req,
     app:       app,
-    user: req.user
+    user: req.user,
+    ismobile: is_mobile(req)
   });
 });
 
@@ -624,7 +625,8 @@ app.get('/terms', function(req, res){
 	layout:    false,
     req:       req,
     app:       app,
-    user: req.user
+    user: req.user,
+    ismobile: is_mobile(req)
   });
 });
 
