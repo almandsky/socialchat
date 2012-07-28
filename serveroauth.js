@@ -3,6 +3,12 @@ var express = require('express')
   , util = require('util')
   , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+//For socket authentication
+//Enable authotentication with the session of Express.
+var connect = require('express/node_modules/connect')
+  , parseCookie = connect.utils.parseCookie
+  , MemoryStore = connect.middleware.session.MemoryStore
+  , store;
 
 var everyauth = require('everyauth');
 var conf = require('./conf');
@@ -492,7 +498,11 @@ var app = express.createServer(
 	, express.static(__dirname + "/public")
 	, express.favicon()
 	, express.cookieParser()
-	, express.session({ secret: 'htuayreve'})
+	, express.session({ 	
+		secret: 'htuayreve'
+		, key: 'express.sid'
+		, store: store = new MemoryStore()
+	})
 	, everyauth.middleware()
 	);
 
@@ -647,7 +657,23 @@ app.get('/room', function(req, res, next){
 
 
 //Add socket.io
-var io = require('socket.io').listen(app)
+var io = require('socket.io').listen(app);
+
+//Enable authotentication with the session of Express.
+io.set('authorization', function (data, accept) {
+  if (!data.headers.cookie) 
+    return accept('No cookie transmitted.', false);
+
+  data.cookie = parseCookie(data.headers.cookie);
+  data.sessionID = data.cookie['express.sid'];
+
+  store.load(data.sessionID, function (err, session) {
+    if (err || !session) return accept('Error', false);
+
+    data.session = session;
+    return accept(null, true);
+  });
+})
 
 
 
