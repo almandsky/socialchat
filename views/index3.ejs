@@ -298,12 +298,54 @@
     </section>
     -->
 
+<!-- original content is here -->
+
 	<section id="guides" class="clearfix">
 		<hr/>
 		<h2>You are now in chat room: <%= room %></h2>
 		<hr/>
 	    There are <b style="color:red"><span id="totaluser"></span></b> users currently in this chat room including you. Go to the <a href="#onlineuser" alt="online users">Online Users</a> section to see who they are.
-	    <hr/>
+	</section>
+
+
+
+
+    <!-- User list -->
+
+
+	<section id="guides" class="clearfix">
+	    <span id="userstatus" style="color:grey"></span>
+		<hr/>
+        <div id="userlistdiv">
+	   	    <a name=onlineuser><h3>Online users:</h2></a> 
+			<div id="userlist">
+	        </div>
+        </div>
+    </section>
+
+	<!-- Message Input Box -->
+
+    <% if (user) { %>
+
+    <section id="samples" class="clearfix">
+      <div>
+	      Say something: <br/>
+          <input type="text" id="input" disabled="disabled" />
+      </div>
+      
+      
+    </section>
+
+    <% } else { %>
+     	<section id="samples" class="clearfix">
+		      <h2 style="color:red">Please click the login button above first to join the chat room</h2>
+	    </section>
+      <% } %>
+	
+	
+	<!-- Chat history-->
+	
+	<section id="guides" class="clearfix">
 	<table >
 		<tr>
 			<td style="vertical-align:top;">
@@ -333,36 +375,6 @@
     </section>
 
 
-    <% if (user) { %>
-
-    <section id="samples" class="clearfix">
-      <div>
-	      Say something: <br/>
-          <input type="text" id="input" disabled="disabled" />
-      </div>
-      
-      
-    </section>
-
-    <% } else { %>
-     	<section id="samples" class="clearfix">
-		      <h2 style="color:red">Please click the login button above first to join the chat room</h2>
-	    </section>
-      <% } %>
-
-
-    <!-- User list -->
-
-
-	<section id="guides" class="clearfix">
-	    <span id="userstatus" style="color:grey"></span>
-		<hr/>
-        <div id="userlistdiv">
-	   	    <a name=onlineuser><h3>Online users:</h2></a> 
-			<div id="userlist">
-	        </div>
-        </div>
-    </section>
 	<section id="guides" class="clearfix">
 		<div itemscope itemtype="http://data-vocabulary.org/Person">
 		<p>
