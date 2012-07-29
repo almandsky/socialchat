@@ -918,6 +918,11 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 
   });
 
+
+  //User Logout event
+
+
+
   //Room Created event
   socket.on('roomcreated', function (roomdata) { 
       //console.log((new Date()) + "recived data of user loged in ----------------------------------------------------------");
@@ -957,6 +962,17 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 
 		  if (clientdata !== false) {
 		  	clients.splice(clients.indexOf(clientdata), 1);
+		
+			//update the changes to other clients
+			socket.json.send({ type:'userleft', data: clientdata });
+	      	socket.broadcast.json.send({ type:'userleft', data: clientdata });
+
+
+	      	//Broadcast the new list
+	      	socket.json.send({ type: 'userlist', data: clients });
+	      	socket.broadcast.json.send({ type:'userlist', data: clients });
+		
+		
 		    clientdata = false;
 		  }
 
