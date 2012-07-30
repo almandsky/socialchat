@@ -389,5 +389,26 @@ $(function () {
 	
 	    }
 	
+	
+		
+		$("#joinroom").click(function(){
+			var newroomname = $('#roomname');
+		   //alert(newroomname.val());
+		
+		if (newroomname.val()==null || newroomname.val()==""){
+		  
+		  alert("Please input a room name!");
+		  return false;
+		  
+		} else if (!newroomname.val().match(/^[0-9a-z]+$/)) {
+		  alert("Please input alphanumeric for room name only!");
+		  return false;
+		} else {
+		
+			window.location.href = "/?room=" + newroomname.val();
+		}
+		
+		 });
+		
 
 });

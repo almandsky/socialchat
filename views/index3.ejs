@@ -307,13 +307,19 @@
 		<hr/>
 	    <p>There are <b style="color:red"><span id="totaluser"></span></b> users currently in this chat room including you. Go to the <a href="#onlineuser" alt="online users">Online Users</a> section to see who they are.</p>
 	    <div id="roomlistdiv">
-	   	    <h3>Room List:</h2>
+	   	    
 				<% if (user) { %>
+					<form id="form1" method="post" action=""> 
+					<div>Room: <input type="text"  id="roomname" name="roomname"/> <button id="joinroom">Join</button></div>
+					</form>
+					<h3>Room List:</h3>
 		    		<div id="roomlist">
+					</div>
+					
 				<% } else { %>
 					<p style="color:red">Please login to join private chat room</p>
 				<% } %>
-	        </div>
+	        
         </div>
 	</section>
 
