@@ -166,7 +166,7 @@ $(function () {
 	          roomlist.empty();
 			  
 	          	for (var key in json.data) {
-					console.log("the room name are:" + key);
+					//console.log("the room name are:" + key);
 					if (key != '/public'){
 						addRoom(key);
 					}

@@ -178,37 +178,6 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
 
-	<% if (ismobile) { %>
-
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-9581795834127896";
-		/* Mobile Banner */
-		google_ad_slot = "0973657599";
-		google_ad_width = 320;
-		google_ad_height = 50;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-
-	<% } else { %>
-
-	<!-- ads -->
-	<script type="text/javascript"><!--
-	google_ad_client = "ca-pub-9581795834127896";
-	/* myfirstads */
-	google_ad_slot = "5461474990";
-	google_ad_width = 728;
-	google_ad_height = 90;
-	//-->
-	</script>
-	<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
-	
-	<% } %>
-
 
     <header class="clearfix">
       <% if (user) { %>
@@ -302,16 +271,51 @@
 <!-- original content is here -->
 
 	<section id="guides" class="clearfix">
+		
+		<!-- Banner Ads -->
+		<% if (ismobile) { %>
+
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-9581795834127896";
+			/* Mobile Banner */
+			google_ad_slot = "0973657599";
+			google_ad_width = 320;
+			google_ad_height = 50;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+
+		<% } else { %>
+
+		<!-- ads -->
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* myfirstads */
+		google_ad_slot = "5461474990";
+		google_ad_width = 728;
+		google_ad_height = 90;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+		<% } %>
+		
 		<hr/>
-		<h2>You are now in chat room: <%= room %></h2>
+		<h2>You are now in chat room: <b style="color:blue"><%= room %></b></h2>
 		<hr/>
 	    <p>There are <b style="color:red"><span id="totaluser"></span></b> users currently in this chat room including you. Go to the <a href="#onlineuser" alt="online users">Online Users</a> section to see who they are.</p>
-	    <div id="roomlistdiv">
+		<hr/>    
+		<div id="roomlistdiv">
 	   	    
 				<% if (user) { %>
 					<!--form id="form1" method="post" action=""--> 
 					<div>Room: <input type="text"  id="roomname" name="roomname"/> <button id="joinroom">Join</button></div>
 					<!--/form-->
+					<hr/>
 					<h3>Room List:</h3>
 		    		<div id="roomlist">
 					</div>
@@ -368,6 +372,7 @@
 		        <div id="content"></div>
 			</td>
 			
+			<!-- Side bar Ads for desktop only -->
 			<% if (!ismobile) { %>
 			
 			<td style="vertical-align:top;">
@@ -424,6 +429,39 @@
 		  Taiwan</span>.
 		</p>
 		</div>
+		
+		<!-- Footer Ads -->
+		<% if (ismobile) { %>
+
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-9581795834127896";
+			/* Mobile Banner */
+			google_ad_slot = "0973657599";
+			google_ad_width = 320;
+			google_ad_height = 50;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+
+		<% } else { %>
+
+		<!-- ads -->
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* myfirstads */
+		google_ad_slot = "5461474990";
+		google_ad_width = 728;
+		google_ad_height = 90;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+		<% } %>
+		
     </section>
 
 
@@ -484,37 +522,8 @@
 	  })();
 
 	</script>
-	<!-- ads -->
-	<% if (ismobile) { %>
-
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-9581795834127896";
-		/* Mobile Banner */
-		google_ad_slot = "0973657599";
-		google_ad_width = 320;
-		google_ad_height = 50;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-
-	<% } else { %>
-
-	<!-- ads -->
-	<script type="text/javascript"><!--
-	google_ad_client = "ca-pub-9581795834127896";
-	/* myfirstads */
-	google_ad_slot = "5461474990";
-	google_ad_width = 728;
-	google_ad_height = 90;
-	//-->
-	</script>
-	<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
 	
-	<% } %>
+	
 	
 	<!--
 	<script type="text/javascript">
