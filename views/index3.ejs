@@ -178,6 +178,22 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
 
+	<!-- Banner Ads for mobile -->
+	<% if (ismobile) { %>
+
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* Mobile Banner */
+		google_ad_slot = "0973657599";
+		google_ad_width = 320;
+		google_ad_height = 50;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+	<% } %>
 
     <header class="clearfix">
       <% if (user) { %>
@@ -272,24 +288,9 @@
 
 	<section id="guides" class="clearfix">
 		
-		<!-- Banner Ads -->
-		<% if (ismobile) { %>
+		<!-- Banner Ads for desktop -->
+		<% if (!ismobile) { %>
 
-			<script type="text/javascript"><!--
-			google_ad_client = "ca-pub-9581795834127896";
-			/* Mobile Banner */
-			google_ad_slot = "0973657599";
-			google_ad_width = 320;
-			google_ad_height = 50;
-			//-->
-			</script>
-			<script type="text/javascript"
-			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-			</script>
-
-		<% } else { %>
-
-		<!-- ads -->
 		<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-9581795834127896";
 		/* myfirstads */
@@ -430,24 +431,9 @@
 		</p>
 		</div>
 		
-		<!-- Footer Ads -->
-		<% if (ismobile) { %>
+		<!-- Footer Ads for desktop-->
+		<% if (!ismobile) { %>
 
-			<script type="text/javascript"><!--
-			google_ad_client = "ca-pub-9581795834127896";
-			/* Mobile Banner */
-			google_ad_slot = "0973657599";
-			google_ad_width = 320;
-			google_ad_height = 50;
-			//-->
-			</script>
-			<script type="text/javascript"
-			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-			</script>
-
-		<% } else { %>
-
-		<!-- ads -->
 		<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-9581795834127896";
 		/* myfirstads */
@@ -523,7 +509,22 @@
 
 	</script>
 	
-	
+	<!-- Footer Ads for mobile -->
+	<% if (ismobile) { %>
+
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* Mobile Banner */
+		google_ad_slot = "0973657599";
+		google_ad_width = 320;
+		google_ad_height = 50;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+	<% } %>
 	
 	<!--
 	<script type="text/javascript">
