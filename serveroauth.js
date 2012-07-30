@@ -773,6 +773,7 @@ io.sockets.on('connection', function (socket) {
   var userID = false;
   var userType = false;
   var userPhoto = false;
+  var userRoom = false;
   // send back chat history
 
   var clientdata = false;
@@ -793,6 +794,11 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 	  console.log((new Date()) + ' bradcast the user list');
       socket.json.send({ type: 'userlist', data: clients });
   }
+
+  if (io.sockets.manager.rooms){
+	  console.log((new Date()) + ' bradcast the room list');
+      socket.json.send({ type: 'roomlist', data: io.sockets.manager.rooms });
+  };
   
 
 
@@ -811,9 +817,10 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 	  //console.log((new Date()) + ' message received');
 	  //console.dir(message);
 	  //console.dir(JSON.parse(message));
-  	//  console.dir(message.data);
+  	  //console.dir(message.data);
 
-       
+	  //if room is not public, then handle differently.
+
 
           if (userName === false || userName === undefined) { // first message sent by user is their name
               // remember user name
@@ -827,6 +834,7 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 				userID = tempobj.userid;
 				userName = tempobj.author;
 				userPhoto = tempobj.picture;
+				userRoom = tempobj.room;
               
 			  }
               //console.log("user name is: " + userName);
@@ -835,10 +843,36 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
               //userColor = colors.shift();
               //connection.sendUTF(JSON.stringify({ type:'color', data: userColor }));
 			  
+			  //socket.join(userRoom);
+			   socket.join(userRoom);
+		       socket.json.send({ type: 'roomlist', data: io.sockets.manager.rooms });
 			
               socket.json.send({ type:'user', data: tempobj });
               console.log((new Date()) + ' User is known as: ' + userName
                           + ' with id ' + userID );
+
+						var tempusername = false;
+						if (userName === 'undefined'){
+							tempusername = 'anonymous';
+						} else {
+							tempusername = userName;
+						}
+
+						var defaultobj = {
+			                  time: (new Date()).getTime(),
+			                  text: htmlEntities(tempusername + ' joined to chat room: ' + userRoom),
+			                  author: tempusername,
+			                  userid: userID,
+			                  acctype: userType,
+			                  picture: userPhoto,
+							  room: userRoom
+			              };
+
+			  //Clear the chat history if the room is not public
+			  if (userRoom != 'public') {
+					socket.in(userRoom).json.send({ type: 'history', data: [defaultobj] });
+					//socket.broadcast.in(userRoom).json.send({ type: 'history', data: [defaultobj] });
+			  }
 
 
           } else { // log and broadcast the message
@@ -852,9 +886,21 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
                   author: userName,
                   userid: userID,
                   acctype: userType,
-                  picture: userPhoto
+                  picture: userPhoto,
+				  room: userRoom
               };
               
+
+			//Add handleing for room
+			//debug and try first
+			if (userRoom != 'public'){
+				//now user is in different room.
+				io.sockets.in(userRoom).json.send({ type:'message', data: obj });
+				//socket.broadcast.in(userRoom).json.send({ type:'message', data: obj });
+				
+			} else {
+
+
 		 	  // Only send back the message without the '|'
               if (message.indexOf('{ "author":') < 0){
 
@@ -886,8 +932,9 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
               //socket.broadcast.json.send(json);
               socket.json.send({ type:'message', data: obj });
               socket.broadcast.json.send({ type:'message', data: obj });
-          }
-      //}
+			}
+       }
+      
 	
   });
 
@@ -908,7 +955,6 @@ colors.sort(function(a,b) { return Math.random() > 0.5; } );
 
 	  socket.json.send({ type:'userjoined', data: userdata });
       socket.broadcast.json.send({ type:'userjoined', data: userdata });
-      
 
       //Broadcast the new list
       socket.json.send({ type: 'userlist', data: clients });

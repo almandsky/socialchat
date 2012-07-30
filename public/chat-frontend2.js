@@ -15,6 +15,8 @@ $(function () {
     var userlist =  $('#userlist');
     var totaluser =  $('#totaluser');
 
+	var room = $('#room');
+	var roomlist =  $('#roomlist');
 
     // my ID assigned by the server
     var myID = false;
@@ -53,7 +55,7 @@ $(function () {
           }
 */
 
-		var tempmsgjson = '{ "author": "' + username.val() + '" , "userid":  "' + userid.val() + '" , "acctype": "' + acctype.val()  + '" , "picture":  "' + picture.val() + '"  }';
+		var tempmsgjson = '{ "author": "' + username.val() + '" , "userid":  "' + userid.val() + '" , "acctype": "' + acctype.val()  + '" , "picture":  "' + picture.val() + '", "room":  "' + room.val() + '"  }';
 
 
 
@@ -159,6 +161,16 @@ $(function () {
                          json.data[i].userid, new Date(json.data[i].time), json.data[i].picture);
               }
               //historyshown = true;
+
+		  } else if (json.type === 'roomlist') { // list all users
+	          roomlist.empty();
+			  
+	          	for (var key in json.data) {
+					console.log("the room name are:" + key);
+					if (key != '/public'){
+						addRoom(key);
+					}
+				}
 
 		  } else if (json.type === 'userjoined') { // user joined the chat room
 			  
@@ -355,6 +367,27 @@ $(function () {
 	
 	    }
 	
+	
+		/**
+	     * Add room to the room list
+	     */
+	    function addRoom(room_name) {
+		    
+			var roomlink = false;
+			var roomname = false;
+			
+			if (room_name ==='') {
+	            roomname = 'public';
+				roomlink = '/';
+			} else {
+			    roomname = room_name.substr(1,room_name.length-1);
+	            roomlink = '/?room=' + roomname;
+			}
+	
+			roomlist.append('<div id="chatroom-' + roomname + ' " class="rooms"><a href="' + roomlink + '">' + roomname + '</a></div>');
+	        
+	
+	    }
 	
 
 });
