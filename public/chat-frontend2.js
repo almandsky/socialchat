@@ -395,14 +395,13 @@ $(function () {
 			var newroomname = $('#roomname');
 		   //alert(newroomname.val());
 		
-		var stringvalidate = newroomname.val();
 		
-		if (stringvalidate==null || stringvalidate==""){
+		if (newroomname.val()==null || newroomname.val()==""){
 		  
 		  alert("Please input a room name!");
 		  return false;
 		  
-		} else if (!stringvalidate.match(/^[0-9a-zA-Z]+$/)) {
+		} else if (!newroomname.val().match(/^[0-9a-zA-Z]+$/)) {
 		  alert("Please input alphanumeric for room name only!");
 		  return false;
 		} else {
