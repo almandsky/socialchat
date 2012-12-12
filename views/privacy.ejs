@@ -1,100 +1,7 @@
-<!DOCTYPE html>
-<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
-
-    <title>Social Chat - Privacy Policies</title>
-	<meta name='description' content='Privacy Policies of Social Chat - Real time Social Chat room on Node.js, support multiple Social Networks logins.  My name is Sky Chen. Here is my blog: http://almandsky.wordpress.com/. I works as QE Manager in Yahoo! Taiwan.' />
-    <link rel="canonical" href="http://chat.skychen.com/privacy" />
-    <link rel="stylesheet" href="stylesheets/screen.css" media="Screen" type="text/css" />
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-width: 480px), only screen and (max-device-width: 480px)" type="text/css" />
-
-     <link rel="stylesheet" href="https://s-static.ak.fbcdn.net/rsrc.php/v2/ya/r/zlVq5y5_w28.css" media="Screen" type="text/css" />
-
-	<!--[if IEMobile]>
-    <link rel="stylesheet" href="mobile.css" media="screen" type="text/css"  />
-    <![endif]-->
-
-	
+<%- partial('head') %>
 
 
 
-    <!-- These are Open Graph tags.  They add meta data to your  -->
-    <!-- site that facebook uses when your content is shared     -->
-    <!-- over facebook.  You should fill these tags in with      -->
-    <!-- your data.  To learn more about Open Graph, visit       -->
-    <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="Social Chat" />
-    <meta property="og:type" content="website" />
-	<meta property="og:url" content="<%= scheme %><%= url_no_scheme('') %>" />
-	<meta property="og:image" content="<%= scheme %><%= url_no_scheme('/images/logo.png') %>" />
-    <meta property="og:site_name" content="Social Chat" />
-    <meta property="og:description" content="Real time social chat room" />
-    <meta property="fb:app_id" content="371656099548187" />
-
-    <!--script type="text/javascript" src="/scripts/jquery.min.js"></script-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-      function logResponse(response) {
-        if (console && console.log) {
-          console.log('The response was', response);
-        }
-      }
-
-      $(function(){
-        // Set up so we handle click on the buttons
-        $('#postToWall').click(function() {
-          FB.ui(
-            {
-              method : 'feed',
-              link   : $(this).attr('data-url')
-            },
-            function (response) {
-              // If response is null the user canceled the dialog
-              if (response != null) {
-                logResponse(response);
-              }
-            }
-          );
-        });
-
-        $('#sendToFriends').click(function() {
-          FB.ui(
-            {
-              method : 'send',
-              link   : $(this).attr('data-url')
-            },
-            function (response) {
-              // If response is null the user canceled the dialog
-              if (response != null) {
-                logResponse(response);
-              }
-            }
-          );
-        });
-
-        $('#sendRequest').click(function() {
-          FB.ui(
-            {
-              method  : 'apprequests',
-              message : $(this).attr('data-message')
-            },
-            function (response) {
-              // If response is null the user canceled the dialog
-              if (response != null) {
-                logResponse(response);
-              }
-            }
-          );
-        });
-      });
-    </script>
-
-    
-    <script src="http://chat.skychen.com/socket.io/socket.io.v0.9.6.js"></script>
-    <!--script src="/chat-frontend2.js"></script-->
 
     <!--[if IE]>
       <script type="text/javascript">
@@ -104,42 +11,20 @@
       </script>
     <![endif]-->
   </head>
+
   <body>
     <div id="fb-root"></div>
 
     <script type="text/javascript">
 
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '<%= app.id %>', // App ID
-          channelUrl : '<%= scheme %><%= url_no_scheme('/channel.html') %>', // Channel File
-          status     : true, // check login status
-          cookie     : true, // enable cookies to allow the server to access the session
-          xfbml      : true // parse XFBML
-        });
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=371656099548187";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 
-        // Listen to the auth.login which will be called when the user logs in
-        // using the Login button
-        FB.Event.subscribe('auth.login', function(response) {
-          // We want to reload the page now so PHP can read the cookie that the
-          // Javascript SDK sat. But we don't want to use
-          // window.location.reload() because if this is in a canvas there was a
-          // post made to this page and a reload will trigger a message to the
-          // user asking if they want to send data again.
-          window.location = window.location;
-        });
-
-        FB.Canvas.setAutoGrow();
-      };
-
-      // Load the SDK Asynchronously
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/all.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
     </script>
 
 	<% if (ismobile) { %>
@@ -264,144 +149,5 @@
     </section>
 
     
-
-    
-	<section id="guides" class="clearfix">
-		<div itemscope itemtype="http://data-vocabulary.org/Person">
-		<p>
-<b>About me:</b> My name is <span itemprop="name">Sky Chen</span>.  Here is my blog: <a href="http://almandsky.wordpress.com/" itemprop="url" alt="Sky Chen's Blog">http://almandsky.wordpress.com/</a>.  I works as <span itemprop="role">QE</span> <span itemprop="title">Manager</span> in <span itemprop="organization">Yahoo!</span> <span itemprop="location">Taiwan</span>.
-		</p>
-	    </div>
-    </section>
-	<section id="guides" class="clearfix">
-		<div style="text-align:center">
-		<a href="/" alt="Home">Home</a> | <a href="/privacy" alt="Privacy Policies">Privacy Policies</a> | <a href="/terms" alt="Terms of Service">Terms of Service</a> | <a href="mailto:tianxiong_chen@hotmail.com" alt="Contact Us">Contact Us</a> | <a href="http://almandsky.wordpress.com/"alt="About Us">About Us</a>
-	    </div>
-		<div style="text-align:center">
-	    Copyright &copy; 2012 skychen.com All Rights Reserved.
-	    </div>
-		<div style="text-align:center">
-	    <p xmlns:dct="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
-		  <a rel="license"
-		     href="http://creativecommons.org/publicdomain/zero/1.0/">
-		    <img src="http://i.creativecommons.org/p/zero/1.0/80x15.png" style="border-style: none;" alt="CC0" />
-		  </a>
-		  <br />
-		  To the extent possible under law,
-		  <a rel="dct:publisher"
-		     href="http://skychen.com">
-		    <span property="dct:title">Sky Chen</span></a>
-		  has waived all copyright and related or neighboring rights to
-		  <span property="dct:title">Sky Chen</span>.
-		This work is published from:
-		<span property="vcard:Country" datatype="dct:ISO3166"
-		      content="TW" about="skychen.com">
-		  Taiwan</span>.
-		</p>
-		</div>
-    </section>
-
-
-    <!-- Disqus comment widget -->
-<!--
-    <br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-
-    <hr/>
-
-    <div id="disqus_thread" style="background-color:#EEE; margin:5px"></div>
-	<script type="text/javascript">
-	    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-	    var disqus_shortname = 'socialchat'; // required: replace example with your forum shortname
-	    var disqus_url = 'http://fbwebsocket.nodester.com/';
-
-	    /* * * DON'T EDIT BELOW THIS LINE * * */
-	    (function() {
-	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	    })();
-	</script>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-	<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-    <script type="text/javascript">
-	    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-	    var disqus_shortname = 'socialchat'; // required: replace example with your forum shortname
-	    var disqus_url = 'http://fbwebsocket.nodester.com/';
-
-	    /* * * DON'T EDIT BELOW THIS LINE * * */
-	    (function () {
-	        var s = document.createElement('script'); s.async = true;
-	        s.type = 'text/javascript';
-	        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-	        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-	    }());
-	</script>
-	
--->
-	
-	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-32696506-1']);
-	  _gaq.push(['_setDomainName', 'skychen.com']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
-	
-	
-	<% if (ismobile) { %>
-
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-9581795834127896";
-		/* Mobile Banner */
-		google_ad_slot = "0973657599";
-		google_ad_width = 320;
-		google_ad_height = 50;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-
-	<% } else { %>
-
-	<!-- ads -->
-	<script type="text/javascript"><!--
-	google_ad_client = "ca-pub-9581795834127896";
-	/* myfirstads */
-	google_ad_slot = "5461474990";
-	google_ad_width = 728;
-	google_ad_height = 90;
-	//-->
-	</script>
-	<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
-	
-	<% } %>
-	
-	
-	<!--
-	<script type="text/javascript">
-	setTimeout(function(){var a=document.createElement("script");
-	var b=document.getElementsByTagName("script")[0];
-	a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0012/8608.js?"+Math.floor(new Date().getTime()/3600000);
-	a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-	</script>
-	-->
-
-  </body>
-</html>
+<%- partial('foot') %>
 

@@ -1,5 +1,290 @@
-<% if (!user) { %>
-	<h2>Welcome! Please log in.</h2>
-<% } else { %>
-	<h2>Hello, <%= user.displayName %>.</h2>
-<% } %>
+<%
+
+var picture = false;
+var userid = false;
+var username = false;
+var acctype = false;
+if (user) {
+	if (user.facebook){
+		picture = 'http://graph.facebook.com/' + user.facebook.id + '/picture?type=square';
+		username = user.facebook.name;
+		userid = user.facebook.id;
+		acctype = 'facebook';
+	} else if (user.google){
+		picture = user.google.picture;
+		username = user.google.name;
+		userid = user.google.id;
+		acctype = 'google';
+	} else if (user.yahoo){
+		picture = user.yahoo.image.imageUrl;
+		username = user.yahoo.nickname;
+		userid = user.yahoo.guid;
+		acctype = 'yahoo';
+	} else if (user.linkedin){
+		picture = user.linkedin.pictureUrl;
+		username = user.linkedin.firstName;
+		userid = user.linkedin.publicProfileUrl;
+		acctype = 'linkedin';
+	} else if (user.twitter){
+		picture = user.twitter.profile_image_url;
+		username = user.twitter.name;
+		userid = user.twitter.screen_name;
+		acctype = 'twitter';
+	}
+	
+}
+
+%>
+
+
+    <script src="/socket.io/socket.io.v0.9.10.js"></script>
+    <script src="/chat-frontend2.js"></script>
+
+    <!--[if IE]>
+      <script type="text/javascript">
+        var tags = ['header', 'section'];
+        while(tags.length)
+          document.createElement(tags.pop());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="fb-root"></div>
+
+    <script type="text/javascript">
+
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=371656099548187";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+    </script>
+
+
+
+	<!-- Banner Ads for mobile -->
+	<% if (ismobile) { %>
+
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* Mobile Banner */
+		google_ad_slot = "0973657599";
+		google_ad_width = 320;
+		google_ad_height = 50;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+	<% } %>
+
+    <header class="clearfix">
+      <% if (user) { %>
+      <p id="picture" style="background-image: url(<%= picture %>)"></p>
+           
+      <div>
+	    <h1>Social Chat (<%= acctype %>)</h1>
+        <h2>Welcome, <strong><%= username %></strong></h2>
+		<div><input id="userid" type="hidden" value="<%= userid %>">
+		<input id="username" type="hidden" value="<%= username %>">
+		<input id="userpicture" type="hidden" value="<%= picture %>">
+		<input id="acctype" type="hidden" value="<%= acctype %>">
+		<input id="room" type="hidden" value="<%= room %>">
+		<div align="right"> <a href="/logout">Log out</a></div>
+
+        <!--
+        <p class="tagline">
+          This is your app
+          <a href="<%= app.link %>" target="_top"><%= app.name %></a>
+        </p>
+
+        <div id="share-app">
+          <p>Share your app:</p>
+          <ul>
+            <li>
+              <a href="#" class="facebook-button" id="postToWall" data-url="<%= scheme %><%= url_no_scheme('') %>">
+                <span class="plus">Post to Wall</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="facebook-button speech-bubble" id="sendToFriends" data-url="<%= scheme %><%= url_no_scheme('') %>">
+                <span class="speech-bubble">Send Message</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="facebook-button apprequests" id="sendRequest" data-message="Test this awesome app">
+                <span class="apprequests">Send Requests</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        -->
+      </div>
+      <div class="fb-like" data-href="http://chat.skychen.com/" data-send="false" data-width="300" data-show-faces="false"></div>
+      <g:plusone></g:plusone>
+	
+      <% } else { %>
+      <div>
+	    <h1>Social Chat</h1>
+        <h2>Welcome, please login and join the chat:</h2>
+        
+        <a href="/auth/facebook"><img height="22" alt="facebook login" src="/images/fb-login.png"/></a>  
+        <a href="/auth/google"><img height="22" alt="google login" src="/images/google-login.png"/></a>  
+        <a href="/auth/yahoo"><img height="22" alt="yahoo login" src="http://l.yimg.com/a/i/reg/openid/buttons/1_new.png"/></a>
+        <!--a href="/auth/linkedin"><img height="22px" src="http://press.linkedin.com/sites/all/themes/presslinkedin/images/LinkedIn_WebLogo_LowResExample.jpg"/></a-->
+        <a href="/auth/twitter"><img height="22" alt="twitter login"  src="http://si0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png"/></a>
+
+		<input id="room" type="hidden" value="<%= room %>">
+		
+        <!--div class="fb-login-button" data-scope="user_likes,user_photos"> </div-->
+	 <!--img width="71px" src="https://richi.com/images/ya_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/go_login.jpg"> <br/> <img width="71px" src="https://richi.com/images/pl_login.jpg"-->
+	     <br/>
+
+      </div>
+
+	  <div class="fb-like" data-href="http://chat.skychen.com/" data-send="false" data-width="300" data-show-faces="false"></div>
+	  <g:plusone></g:plusone>
+	
+      <% } %>
+      <script type="text/javascript">
+	      window.___gcfg = {
+	        lang: 'en-US'
+	      };
+
+	      (function() {
+	        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	        po.src = 'https://apis.google.com/js/plusone.js';
+	        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	      })();
+	  </script>
+	
+    </header>
+
+    <!--
+    <section id="get-started">
+      <p>This is my app, I can edit it all I want.</p>
+      <a href="https://devcenter.heroku.com/articles/facebook" target="_top" class="button">Learn How to Edit This App</a>
+    </section>
+    -->
+
+<!-- original content is here -->
+
+	<section id="guides" class="clearfix">
+		
+		
+		
+		<!-- Banner Ads for desktop -->
+		<% if (!ismobile) { %>
+
+		<hr/>
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-9581795834127896";
+		/* myfirstads */
+		google_ad_slot = "5461474990";
+		google_ad_width = 728;
+		google_ad_height = 90;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+
+		<% } %>
+		
+		<hr/>
+		<h2>You are now in chat room: <b style="color:blue"><%= room %></b></h2>
+		<hr/>
+	    <p>There are <b style="color:red"><span id="totaluser"></span></b> users currently in this chat room including you. Go to the <a href="#onlineuser" alt="online users">Online Users</a> section to see who they are.</p>
+		<hr/>    
+		<div id="roomlistdiv">
+	   	    
+				<% if (user) { %>
+					<!--form id="form1" method="post" action=""--> 
+					<div>Room: <input type="text"  id="roomname" name="roomname"/> <button id="joinroom">Join</button></div>
+					<!--/form-->
+					<hr/>
+					<h3>Room List:</h3>
+		    		<div id="roomlist">
+					</div>
+					
+				<% } else { %>
+					<p style="color:red">Please login to join private chat room</p>
+				<% } %>
+	        
+        </div>
+	</section>
+
+
+
+
+    <!-- User list -->
+
+
+	<section id="guides" class="clearfix">
+	    <span id="userstatus" style="color:grey"></span>
+		<hr/>
+        <div id="userlistdiv">
+	   	    <a name=onlineuser><h3>Online users:</h3></a> 
+			<div id="userlist">
+	        </div>
+        </div>
+    </section>
+
+	<!-- Message Input Box -->
+
+    <% if (user) { %>
+
+    <section id="samples" class="clearfix">
+      <div>
+	      Say something: <br/>
+          <input type="text" id="input" disabled="disabled" />
+      </div>
+      
+      
+    </section>
+
+    <% } else { %>
+     	<section id="samples" class="clearfix">
+		      <h2 style="color:red">Please click the login button above first to join the chat room</h2>
+	    </section>
+      <% } %>
+	
+	
+	<!-- Chat history-->
+	
+	<section id="guides" class="clearfix">
+	<table >
+		<tr>
+			<td style="vertical-align:top;">
+		        <div id="content"></div>
+			</td>
+			
+			<!-- Side bar Ads for desktop only -->
+			<% if (!ismobile) { %>
+			
+			<td style="vertical-align:top;">
+				<script type="text/javascript"><!--
+				google_ad_client = "ca-pub-9581795834127896";
+				/* sidebar */
+				google_ad_slot = "6058372133";
+				google_ad_width = 160;
+				google_ad_height = 600;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+			</td>
+			
+			<% } %>
+			
+		</tr>
+	</table>
+    </section>
+
+
+

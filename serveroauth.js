@@ -577,7 +577,7 @@ app.get('/', function(req, res){
   console.log("req.user object is: =====================================================");
   console.dir(req.user);
 
-  res.render('index3.ejs', { 
+  res.render('index4.ejs', { 
 	layout:    false,
     req:       req,
     app:       app,
@@ -609,7 +609,7 @@ app.post('/', function(req, res){
   console.log("req.user object is: =====================================================");
   console.dir(req.user);
 
-  res.render('index3.ejs', { 
+  res.render('index4.ejs', { 
 	layout:    false,
     req:       req,
     app:       app,
