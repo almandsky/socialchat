@@ -493,9 +493,12 @@ everyauth
 
 //End of everyauth
 
+var oneYear = 31557600000;
+
+//	, express.static(__dirname + "/public", { maxAge: oneDay })
+
 var app = express.createServer(
 	  express.bodyParser()
-	, express.static(__dirname + "/public")
 	, express.favicon()
 	, express.cookieParser()
 	, express.session({ 	
