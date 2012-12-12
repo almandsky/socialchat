@@ -521,7 +521,7 @@ app.configure(function() {
 
   //app.use(express.static(__dirname + '/public'));
   app.use(express.staticCache());
-  app.use(express.static(__dirname + '/public', {maxAge: 86400000}));
+  app.use(express.static(__dirname + '/public', {maxAge: oneYear}));
 
   app.use(express.cookieParser());
   app.use(express.bodyParser());
