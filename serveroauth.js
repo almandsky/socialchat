@@ -512,14 +512,20 @@ var app = express.createServer(
 
 app.configure(function() {
   app.use(express.logger());
-//  app.use(express.compress());
+  app.use(express.compress());
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.static(__dirname + '/public'));
+
+  //app.use(express.static(__dirname + '/public'));
+  app.use(express.staticCache());
+  app.use(express.static(__dirname + '/public', {maxAge: 86400000}));
+
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
+
+  //app.use(express.compress());
 });
 
 app.dynamicHelpers({
