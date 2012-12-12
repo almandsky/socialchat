@@ -511,9 +511,10 @@ var app = express.createServer(
 // configure Express
 
 app.configure(function() {
+  app.use(express.logger());
+  app.use(express.compress());
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.logger());
   app.use(express.static(__dirname + '/public'));
   app.use(express.cookieParser());
   app.use(express.bodyParser());
