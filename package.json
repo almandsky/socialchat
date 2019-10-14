@@ -4,7 +4,7 @@
   "author":"almandsky",
   "dependencies": {
     "async": "0.1.21",
-    "ejs": "0.7.1",
+    "ejs": "2.7.1",
     "everyauth": "0.2.32",
     "express": "2.5.9",
     "mongojs": "0.4.3",
